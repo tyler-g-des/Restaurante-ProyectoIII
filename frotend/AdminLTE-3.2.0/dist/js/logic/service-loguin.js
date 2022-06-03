@@ -1,55 +1,42 @@
 jQuery(document).ready(function ($) {
 
-
+   
 
   $( "#btn" ).click(function() {
-   let correo = $('#login_email').val();
-   let clave = $('#login_clave').val();
 
-   var sendInfo = {
-    "name":correo,
-    "password":clave,
-   };
-    
 
-   getUser();
-   loguin(sendInfo);
-  });
+    let correo = $('#login_email').val();
+    let clave = $('#login_clave').val();
+
+    var sendInfo = {
+     "name":correo,
+     "password":clave,
+    }
 
 
 
     /*
-   $.ajax({
-       url: 'http://localhost:8080/users/loguins',
-       dataType: "json",
-       method: "POST",
-       async: false,       
-       contentType: "application/json",
-       data: JSON.stringify({sendInfo}),
-       complete: function (data) {
-       },
-       success: function(data){
-       },
-    });
+   var button = document.getElementById('btn');
+    if(button.classList.contains('ripple-surface')){
+      console.log("no llamar")
+      console.log(button)
+      getUser()
+    }
 
-    $.ajax({
-      url: 'http://localhost:8080/users/1',
-      dataType: "json",
-      async: false,       
-      method: "GET",
-      contentType: "application/json",
-      
-      complete: function () {
-      },
-      success: function(){
-      },
+    if(button.classList.contains('ripple-surface') != true){
+      loguinInvoke()
+    }
+ */
+    /*
+    else{
+      window.location.href = "index.html";
+    }
+    */
    });
-  
+   
 
-   */
 
-   // get user with axios 
-
+   //get user with axios 
    getUser = () => {
      axios({
        method: 'get',
@@ -63,6 +50,8 @@ jQuery(document).ready(function ($) {
     };
 
     loguin = (Data) => {
+
+      let status;
       axios({
         method: 'post',
         url:'http://localhost:8080/users/loguins',
@@ -72,9 +61,14 @@ jQuery(document).ready(function ($) {
         data: Data
       })
       .then((res) => console.log(res.data))
-      .then((res) => console.log(res.status))
-      .catch((err) => console.log(err));
-    }
+      .then((res => { 
+       if((res) === 'User signed-in successfully!')
+       {
+        window.location.href = "index.html";
+       }
+        }))
+       .catch((err) => console.log(err))
+
+    };
    
 });
-
