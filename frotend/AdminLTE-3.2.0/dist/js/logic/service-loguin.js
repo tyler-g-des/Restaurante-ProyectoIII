@@ -1,40 +1,23 @@
-jQuery(document).ready(function ($) {
+const boton = document.querySelector('#btn');
+const formulario = document.querySelector('#loguinForm');
 
-   
-
-  $( "#btn" ).click(function() {
-
-
-    let correo = $('#login_email').val();
-    let clave = $('#login_clave').val();
-
-    var sendInfo = {
-     "name":correo,
-     "password":clave,
-    }
-
-
-
-    /*
-   var button = document.getElementById('btn');
-    if(button.classList.contains('ripple-surface')){
-      console.log("no llamar")
-      console.log(button)
-      getUser()
-    }
-
-    if(button.classList.contains('ripple-surface') != true){
-      loguinInvoke()
-    }
- */
-    /*
-    else{
-      window.location.href = "index.html";
-    }
-    */
+   formulario.addEventListener('submit', event => {
+    event.preventDefault();
+    console.log('Envio del formulario');  
    });
    
+   boton.addEventListener('click', event => {
+     let usuario = document.querySelector('#login_email').value;
+     let clave = document.querySelector('#login_clave').value;
+    event.preventDefault();
 
+      datos = {
+        "name":usuario,
+        "password":clave
+       };
+      
+    loguin(datos);
+   });
 
    //get user with axios 
    getUser = () => {
@@ -49,10 +32,10 @@ jQuery(document).ready(function ($) {
      .catch((err) => console.log(err));
     };
 
+    
     loguin = (Data) => {
-
-      let status;
-      axios({
+      let response = null;
+       axios({
         method: 'post',
         url:'http://localhost:8080/users/loguins',
         headers: {
@@ -61,14 +44,17 @@ jQuery(document).ready(function ($) {
         data: Data
       })
       .then((res) => console.log(res.data))
-      .then((res => { 
-       if((res) === 'User signed-in successfully!')
+      .then((res) => response = (res.data))
+      .then(response => { 
+       if(response != null)
        {
         window.location.href = "index.html";
        }
-        }))
-       .catch((err) => console.log(err))
+       else{
+       // window.location.href = "index3.html";
+       }
+        })
+       .catch((err) => console.log(err));
 
     };
    
-});

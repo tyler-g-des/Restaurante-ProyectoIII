@@ -35,6 +35,7 @@ public class UserController{
     }
 
     @PostMapping()
+    @CrossOrigin (origins = "*")
     public Users saveUser(@RequestBody Users user)
     {
         return this.userService.saveUser(user);
