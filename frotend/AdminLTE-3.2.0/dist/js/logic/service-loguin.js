@@ -33,9 +33,9 @@ const formulario = document.querySelector('#loguinForm');
     };
 
     
-    loguin = (Data) => {
+      loguin = async function (Data)  {
       let response = null;
-       axios({
+       await axios({
         method: 'post',
         url:'http://localhost:8080/users/loguins',
         headers: {
@@ -43,18 +43,15 @@ const formulario = document.querySelector('#loguinForm');
           'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',},
         data: Data
       })
-      .then((res) => console.log(res.data))
-      .then((res) => response = (res.data))
-      .then(response => { 
+      .then((res) => console.log(responde=res.data))
+      .catch((err) => console.log(err));
        if(response != null)
        {
         window.location.href = "index.html";
        }
        else{
-       // window.location.href = "index3.html";
+        //window.location.href = "index3.html";
        }
-        })
-       .catch((err) => console.log(err));
-
+        
     };
    

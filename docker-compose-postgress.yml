@@ -1,0 +1,22 @@
+version: '3.1'
+services:
+  db:
+    image: postgres:12
+    container_name: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres    
+    volumes:
+      - /Users/tdiaz/Desktop/data:/var/lib/postgresql/data
+
+  adminer:
+    container_name: adminer
+    image: adminer
+    restart: always
+    depends_on: 
+      - db
+    ports:
+       - 9090:8080
