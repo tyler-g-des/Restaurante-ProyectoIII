@@ -47,7 +47,7 @@ const formulario = document.querySelector('#loguinForm');
       .catch((err) => console.log(err));
        if(response != null)
        {
-        window.location.href = "index.html";
+        window.location.href = "dashboard.html";
        }
        else{
         //window.location.href = "index3.html";
