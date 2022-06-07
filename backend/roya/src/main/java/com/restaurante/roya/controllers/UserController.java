@@ -58,7 +58,7 @@ public class UserController{
         }
             else
             {
-                return new ResponseEntity<>("Not found",HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("Not found",HttpStatus.ACCEPTED);
             }
 
     }

@@ -1,5 +1,7 @@
 const boton = document.querySelector('#btn');
 const formulario = document.querySelector('#loguinForm');
+var response = null;
+
 
    formulario.addEventListener('submit', event => {
     event.preventDefault();
@@ -16,7 +18,8 @@ const formulario = document.querySelector('#loguinForm');
         "password":clave
        };
       
-    loguin(datos);
+     loguin(datos);
+     console.log('log despues de llamada ' + response)
    });
 
    //get user with axios 
@@ -33,9 +36,8 @@ const formulario = document.querySelector('#loguinForm');
     };
 
     
-      loguin = async function (Data)  {
-      let response = null;
-       await axios({
+    loguin = async function (Data)  {
+        axios({
         method: 'post',
         url:'http://localhost:8080/users/loguins',
         headers: {
@@ -43,15 +45,23 @@ const formulario = document.querySelector('#loguinForm');
           'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',},
         data: Data
       })
-      .then((res) => console.log(responde=res.data))
-      .catch((err) => console.log(err));
-       if(response != null)
-       {
-        window.location.href = "dashboard.html";
-       }
-       else{
-        //window.location.href = "index3.html";
-       }
+      .then(res => {
+        response = res.data;
+        if(res.data == 'User signed-in successfully!')
+        {
+         window.location.href = "dashboard.html";
+        }
+        if(res.data == 'Not found')
+        {
+          alert("usuario no valido");
+          console.log('log antes de llamada ' + response);
+        }
+      })
+      .catch(err =>{
+        console.log(err);
+        console.log(err.message);
+      });
+       
         
     };
    
