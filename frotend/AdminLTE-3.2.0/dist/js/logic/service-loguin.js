@@ -1,6 +1,5 @@
 const boton = document.querySelector('#btn');
 const formulario = document.querySelector('#loguinForm');
-var response = null;
 
 
    formulario.addEventListener('submit', event => {
@@ -13,30 +12,31 @@ var response = null;
      let clave = document.querySelector('#login_clave').value;
     event.preventDefault();
 
-      datos = {
-        "name":usuario,
-        "password":clave
-       };
       
-     loguin(datos);
-     console.log('log despues de llamada ' + response)
+     loguin(usuario,clave);
    });
 
-   //get user with axios 
-   getUser = () => {
-     axios({
-       method: 'get',
-       url: 'http://localhost:8080/users',
-       headers: {
-       'Access-Control-Allow-Origin' : '*',
-       'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-       'Access-Control-Allow-Headers':'Content-Type, Authorization,*',},
-     }).then(res => console.log(res))
-     .catch((err) => console.log(err));
-    };
-
+  
     
-    loguin = async function (Data)  {
+    const loguin = async (name,password) => {
+       const response = await axios.post('http://localhost:8080/users/loguins',{
+           "name":name,
+           "password":password
+      })
+
+      if(response.data == 'User signed-in successfully!')
+      {
+       window.location.href = "dashboard.html";
+      }
+      else if(response.data == 'Not found')
+      {
+        alert("usuario no valido");
+      }
+      console.log(response)
+    }
+
+    /*
+    loguins = async function (Data)  {
         axios({
         method: 'post',
         url:'http://localhost:8080/users/loguins',
@@ -49,7 +49,8 @@ var response = null;
         response = res.data;
         if(res.data == 'User signed-in successfully!')
         {
-         window.location.href = "dashboard.html";
+          console.log(res.data);
+        // window.location.href = "dashboard.html";
         }
         if(res.data == 'Not found')
         {
@@ -61,7 +62,20 @@ var response = null;
         console.log(err);
         console.log(err.message);
       });
-       
-        
     };
+
+    //get user with axios 
+   getUser = () => {
+    axios({
+      method: 'get',
+      url: 'http://localhost:8080/users',
+      headers: {
+      'Access-Control-Allow-Origin' : '*',
+      'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+      'Access-Control-Allow-Headers':'Content-Type, Authorization,*',},
+    }).then(res => console.log(res))
+    .catch((err) => console.log(err));
+   }; 
+   */
+
    
