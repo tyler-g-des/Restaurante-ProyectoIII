@@ -13,10 +13,18 @@ public class Users{
     @Column(unique = true, nullable = false)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
+    
     private String email;
+
+    @Column(nullable = false)
     private String password;
+
     private boolean active;
+
+    @Column(nullable = false)
+    private String rol;
 
     
     public Long getId()
@@ -67,5 +75,15 @@ public class Users{
     public void setActive(boolean active)
     {
         this.active = active;
+    }
+
+    public String getRol()
+    {
+       return rol;
+    }
+
+    public void setRol(String rol)
+    {
+        this.rol = rol;
     }
 }
