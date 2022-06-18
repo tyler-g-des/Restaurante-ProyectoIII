@@ -62,4 +62,21 @@ public class UserController{
             }
 
     }
+
+    @PostMapping("/getUserName")
+    @CrossOrigin(origins = "*")
+    public Users getUserName(@RequestBody Users user)
+    {
+        if(this.userService.loguin(user) != null){
+
+            ArrayList<Users> listUser = userService.loguin(user);
+
+            for (Users userFind : listUser) {
+
+                return userFind;
+            }
+            
+        }
+        return null;
+    }
 }

@@ -12,8 +12,7 @@ const formulario = document.querySelector('#loguinForm');
      let clave = document.querySelector('#login_clave').value;
     event.preventDefault();
 
-      
-     loguin(usuario,clave);
+    loguin(usuario,clave);
    });
 
   
@@ -26,14 +25,32 @@ const formulario = document.querySelector('#loguinForm');
 
       if(response.data == 'User signed-in successfully!')
       {
-       window.location.href = "dashboard.html";
+        await dashboardPrepared(name,password);  
+        if(localStorage.getItem(name) !== undefined){
+          window.location.replace("dashboard.html");     
+        }
       }
       else if(response.data == 'Not found')
       {
         alert("usuario no valido");
+        await localStorage.clear()
       }
       console.log(response)
     }
+
+    const dashboardPrepared = async (name,password) => {
+
+        const response = await axios.post('http://localhost:8080/users/getUserName',{
+          "name":name,
+          "password":password
+        })
+          localStorage.setItem('rol',response.data.rol)
+          localStorage.setItem('name',response.data.name)
+    }
+
+ 
+
+
 
     /*
     loguins = async function (Data)  {
