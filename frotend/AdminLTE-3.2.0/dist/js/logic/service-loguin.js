@@ -13,6 +13,7 @@ const formulario = document.querySelector('#loguinForm');
     event.preventDefault();
 
     loguin(usuario,clave);
+    mesaEstados();
    });
 
   
@@ -49,6 +50,11 @@ const formulario = document.querySelector('#loguinForm');
     }
 
  
+    const mesaEstados = async () => {
+      const response = await axios.get('http://localhost:8080/tablets',{
+     });
+     console.log(response);
+  }
 
 
 
