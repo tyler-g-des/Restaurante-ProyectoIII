@@ -10,8 +10,16 @@ mesa.addEventListener('click', event => {
 
 
 const mesaEstados = async () => {
-    const response = await axios.get('http://localhost:8080/tablets',{
-   });
+
+    try {
+        const response = await axios.get('http://localhost:8080/tablets',{
+        });
+    } catch (error) {
+        console.log("aqui " + error)
+       // if(error.includes("Network Error")){
+           alert("Problema al solicitar datos de la Mesas")
+       // }
+    }
 
   let mesaNumber = 1;
   
