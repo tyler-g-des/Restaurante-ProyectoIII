@@ -1,6 +1,7 @@
 let name = window.localStorage.getItem('name');
 let age = window.localStorage.getItem('rol');
 const mesa =  document.querySelector('#titulo');
+let response;
 
 console.log(name, age); 
 
@@ -12,7 +13,7 @@ mesa.addEventListener('click', event => {
 const mesaEstados = async () => {
 
     try {
-        const response = await axios.get('http://localhost:8080/tablets',{
+         response = await axios.get('http://localhost:8080/tablets',{
         });
     } catch (error) {
         console.log("aqui " + error)

@@ -1,5 +1,6 @@
 const boton = document.querySelector('#btn');
 const formulario = document.querySelector('#loguinForm');
+let response;
 
 
    formulario.addEventListener('submit', event => {
@@ -19,7 +20,9 @@ const formulario = document.querySelector('#loguinForm');
   
     
     const loguin = async (name,password) => {
-       const response = await axios.post('http://localhost:8080/users/loguins',{
+
+      try{
+        response = await axios.post('http://localhost:8080/users/loguins',{
            "name":name,
            "password":password
       })
@@ -28,7 +31,7 @@ const formulario = document.querySelector('#loguinForm');
       {
         await dashboardPrepared(name,password);  
         if(localStorage.getItem(name) !== undefined){
-          window.location.replace("dashboard.html");     
+          window.location.replace("pages/order/tomarOrdenes.html");     
         }
       }
       else if(response.data == 'Not found')
@@ -36,7 +39,13 @@ const formulario = document.querySelector('#loguinForm');
         alert("usuario no valido");
         await localStorage.clear()
       }
-      console.log(response)
+      console.log(response)  
+      }
+
+    catch(error){
+      alert("Problema al solicitar datos del usuario conexion fallida")
+    }
+      
     }
 
     const dashboardPrepared = async (name,password) => {
@@ -55,8 +64,6 @@ const formulario = document.querySelector('#loguinForm');
      });
      console.log(response);
   }
-
-
 
     /*
     loguins = async function (Data)  {
@@ -100,5 +107,3 @@ const formulario = document.querySelector('#loguinForm');
     .catch((err) => console.log(err));
    }; 
    */
-
-   
