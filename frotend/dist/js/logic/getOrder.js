@@ -1,5 +1,5 @@
 // Acciones 
-const boton = document.querySelector("#iniciarPedido");
+const botonIniciarPedido = document.querySelector("#iniciarPedido");
 const botonTomarOrdenes = document.querySelector("#tomarOrdenes");
 const botonVolver = document.querySelector("#volverOrdenes");
 let footer;
@@ -11,10 +11,11 @@ document.getElementById("fecha").value =  fecha.toJSON().slice(0,10);
 
 
 //Obtener cantidad de personas
-boton.addEventListener('click', event => {
+botonIniciarPedido.addEventListener('click', event => {
    let numeroPersonas = document.getElementById("numeroPersona");
 });
 
+//Tomar Ordenes
 botonTomarOrdenes.addEventListener('click', event => {
     let nombre = document.querySelector("#nombreCliente");
 
@@ -54,7 +55,7 @@ botonTomarOrdenes.addEventListener('click', event => {
 
         // Al completar los pedidos guardar en base de Datos y regresar a la pagina de tomar ordenes
         if(numeroPersonas.value == 0 || numeroPersonas ==  "0"){
-          alert("Ordenes Tomadas");
+          alert("!Ordenes Tomadas!");
           //AQUI GUARDAR DATOS DE LA ORDEN
           prepararPaginaOrdenes();
         }
