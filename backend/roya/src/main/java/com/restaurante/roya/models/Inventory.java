@@ -13,7 +13,7 @@ public class Inventory {
     @Column(unique = true, nullable = false)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     private String ingredient;
 
     @Column(nullable = false)
@@ -21,4 +21,47 @@ public class Inventory {
 
     @Column(nullable = false)
     private String ingredientType;
+
+
+    public Long getId()
+    {
+        return id;
+    }
+
+    public void setId(Long id)
+    {
+        this.id = id;
+    }
+    
+    public String getIngredient()
+    {
+        return ingredient;
+    }
+
+    public void setIngredient(String Ingredient)
+    {
+        this.ingredient = Ingredient;
+    }
+
+    public int getQuantity()
+    {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity)
+    {
+        this.quantity = quantity;
+    }
+
+    public String getIngredientType()
+    {
+        return ingredientType;
+    }
+
+    public void setIngredientType(String ingredientType)
+    {
+        this.ingredientType = ingredientType;
+    }
+
+    
 }

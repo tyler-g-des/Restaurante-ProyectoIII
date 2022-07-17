@@ -8,6 +8,7 @@
 /Users/tdiaz/Desktop/RESTAURANTE/backend/roya/src/main/java/com/restaurante/roya/RoyaApplication.java
 /Users/tdiaz/Desktop/RESTAURANTE/backend/roya/src/main/java/com/restaurante/roya/repositories/InventoryRepository.java
 /Users/tdiaz/Desktop/RESTAURANTE/backend/roya/src/main/java/com/restaurante/roya/controllers/TabletController.java
+/Users/tdiaz/Desktop/RESTAURANTE/backend/roya/src/main/java/com/restaurante/roya/models/plates.java
 /Users/tdiaz/Desktop/RESTAURANTE/backend/roya/src/main/java/com/restaurante/roya/services/TabletService.java
 /Users/tdiaz/Desktop/RESTAURANTE/backend/roya/src/main/java/com/restaurante/roya/models/Tablets.java
 /Users/tdiaz/Desktop/RESTAURANTE/backend/roya/src/main/java/com/restaurante/roya/models/Inventory.java
