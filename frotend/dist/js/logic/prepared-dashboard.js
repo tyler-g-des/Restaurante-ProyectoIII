@@ -1,9 +1,5 @@
-let name = window.localStorage.getItem('name');
-let age = window.localStorage.getItem('rol');
 const mesa =  document.querySelector('#titulo');
 let response;
-
-console.log(name, age); 
 
 mesa.addEventListener('click', event => {
     mesaEstados();      

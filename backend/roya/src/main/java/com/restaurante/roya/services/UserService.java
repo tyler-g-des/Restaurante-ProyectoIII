@@ -33,7 +33,7 @@ public class UserService{
         return userRepository.findById(id);
     }
 
-    public ArrayList<Users> loguin(Users user){
+    public ArrayList<Users> login(Users user){
 
         ArrayList<Users> usuarios = (ArrayList<Users>) userRepository.findAll();
         
@@ -47,9 +47,44 @@ public class UserService{
                 return null;
             }
         }
-
         return null;
+    }
 
+    public ArrayList<Users> getData(Users user){
+
+        ArrayList<Users> usuarios = (ArrayList<Users>) userRepository.findAll();
+        
+        for (Users users : usuarios) {
+            if(users.getName().equals(user.getName())){
+
+                if(users.getPassword().equals(user.getPassword()))
+                {
+                    return userRepository.findByName(user.getName());      
+                }
+                return null;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Users> getDataComplete(Users user){
+
+        ArrayList<Users> usuarios = (ArrayList<Users>) userRepository.findAll();
+        
+        for (Users users : usuarios) {
+            if(users.getName().equals(user.getName())){
+
+                if(users.getRol().equals(user.getRol()))
+                {
+                    if(users.getEmail().equals(user.getEmail())){
+                        return userRepository.findByName(user.getName());
+                    }
+                    return null;
+                }
+                return null;
+            }
+        }
+        return null;
     }
 /*
     @Override

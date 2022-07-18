@@ -48,12 +48,12 @@ public class UserController{
         return this.userService.getUserId(id);
     }
 
-    @PostMapping("/loguins")
+    @PostMapping("/logins")
     @ResponseStatus(HttpStatus.OK)
     @CrossOrigin (origins = "*")
     public ResponseEntity<String> ValidatedLogin(@RequestBody Users user){
 
-        if(this.userService.loguin(user) != null){
+        if(this.userService.login(user) != null){
         return new ResponseEntity<>("User signed-in successfully!",HttpStatus.ACCEPTED);
         }
             else
@@ -67,15 +67,31 @@ public class UserController{
     @CrossOrigin(origins = "*")
     public Users getUserName(@RequestBody Users user)
     {
-        if(this.userService.loguin(user) != null){
+        if(this.userService.getData(user) != null){
 
-            ArrayList<Users> listUser = userService.loguin(user);
+            ArrayList<Users> listUser = userService.getData(user);
 
             for (Users userFind : listUser) {
 
                 return userFind;
             }
-            
+        }
+        return null;
+    }
+
+
+    @PostMapping("/getUserComplete")
+    @CrossOrigin(origins = "*")
+    public Users getUserComplete(@RequestBody Users user)
+    {
+        if(this.userService.getDataComplete(user) != null){
+
+            ArrayList<Users> listUser = userService.getDataComplete(user);
+
+            for (Users userFind : listUser) {
+
+                return userFind;
+            }
         }
         return null;
     }

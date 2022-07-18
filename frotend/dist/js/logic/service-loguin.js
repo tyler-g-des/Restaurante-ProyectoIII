@@ -14,15 +14,13 @@ let response;
     event.preventDefault();
 
     loguin(usuario,clave);
-    mesaEstados();
    });
 
   
-    
     const loguin = async (name,password) => {
 
       try{
-        response = await axios.post('http://localhost:8080/users/loguins',{
+        response = await axios.post('http://localhost:8080/users/logins',{
            "name":name,
            "password":password
       })
@@ -42,29 +40,28 @@ let response;
       console.log(response)  
       }
 
-    catch(error){
-      alert("Problema al solicitar datos del usuario conexion fallida")
-    }
-      
+      catch(error){
+        alert("Problema al solicitar datos del usuario conexion fallida")
+      } 
     }
 
     const dashboardPrepared = async (name,password) => {
-
         const response = await axios.post('http://localhost:8080/users/getUserName',{
           "name":name,
           "password":password
         })
-          localStorage.setItem('rol',response.data.rol)
-          localStorage.setItem('name',response.data.name)
+          localStorage.setItem('name',response.data.name);
+          localStorage.setItem('rol',response.data.rol);
+          localStorage.setItem('email',response.data.email);
     }
 
- 
+    /*
     const mesaEstados = async () => {
       const response = await axios.get('http://localhost:8080/tablets',{
      });
      console.log(response);
-  }
-
+    }
+     */
     /*
     loguins = async function (Data)  {
         axios({
