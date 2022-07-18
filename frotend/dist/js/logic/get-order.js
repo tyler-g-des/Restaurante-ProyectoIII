@@ -1,3 +1,9 @@
+// Acciones de redireccion - esto es para que al salir se cancele la oferta
+const botonRoya = document.querySelector("#redireccionRoya");
+const botonMesa = document.querySelector("#redireccionMesas");
+const botonEditarUsuario = document.querySelector("#editarUsuarioRedireccion");
+
+
 // Acciones 
 const botonIniciarPedido = document.querySelector("#iniciarPedido");
 const botonTomarOrdenes = document.querySelector("#tomarOrdenes");
@@ -13,7 +19,14 @@ document.getElementById("fecha").value =  fecha.toJSON().slice(0,10);
 //Obtener cantidad de personas
 botonIniciarPedido.addEventListener('click', event => {
    let numeroPersonas = document.getElementById("numeroPersona");
+   botonIniciarPedido
 });
+
+const evento = () => {
+  click_event = new CustomEvent('click');
+ btn_element = document.querySelector('#iniciarPedido');
+ btn_element.dispatchEvent(click_event);
+}
 
 //Tomar Ordenes
 botonTomarOrdenes.addEventListener('click', event => {
@@ -65,12 +78,59 @@ botonTomarOrdenes.addEventListener('click', event => {
 
 
 botonVolver.addEventListener('click', event => {
+
   if(botonVolver.textContent == "Cancelar Orden")
-  {
-    prepararPaginaOrdenes();
+  {      
+      if (window.confirm("Desea cancelar la Orden?")) {
+        prepararPaginaOrdenes();
+      }
+      else{
+        evento();
+      }
   }
 });
 
+// Redirecciones
+botonRoya.addEventListener('click', event => {
+  if(botonVolver.textContent == "Cancelar Orden")
+  {    
+      if (window.confirm("Si recargas la pagina cancelaras la Orden deseas cancelar?")) {
+          prepararPaginaOrdenes();
+      }
+      else{
+         evento();
+         event.preventDefault();
+      }
+ }
+});
+//Si vas a otro menu cancelaras la orden deseas salir igualmente?
+botonMesa.addEventListener('click', event => {
+  if(botonVolver.textContent == "Cancelar Orden")
+  {    
+      if (window.confirm("Si vas a otro menu cancelaras la orden deseas salir igualmente?")) {
+          window.location.replace("order/tablet/dashboard.html");  
+          prepararPaginaOrdenes();
+      }
+      else{
+         evento();
+         event.preventDefault();
+      }
+ }
+});
+
+botonEditarUsuario.addEventListener('click', event => {
+  if(botonVolver.textContent == "Cancelar Orden")
+  {    
+      if (window.confirm("Si vas a otro menu cancelaras la orden deseas salir igualmente?")) {
+         window.location.replace("pages/user/contact-us.html");  
+          prepararPaginaOrdenes();
+      }
+      else{
+        evento();
+        event.preventDefault();
+      }
+ }
+});
 
 const prepararPaginaOrdenes = () => {
   sessionStorage.clear();
