@@ -1,4 +1,4 @@
-const menjae = document.querySelector("#mesajeEditarUsuario");
+document.querySelector("#nombreUsuario").textContent = localStorage.getItem('name');
 
 const campoName = document.querySelector("#campoNombre");
 const campoEmail = document.querySelector("#campoEmail");

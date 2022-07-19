@@ -1,3 +1,5 @@
+document.querySelector("#nombreUsuario").textContent = localStorage.getItem('name');
+
 const mesa =  document.querySelector('#titulo');
 let response;
 
