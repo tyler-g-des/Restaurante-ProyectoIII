@@ -9,8 +9,8 @@ let response;
    });
    
    boton.addEventListener('click', event => {
-     let usuario = document.querySelector('#login_email').value;
-     let clave = document.querySelector('#login_clave').value;
+     let usuario = document.querySelector('#login_email').value.trim();
+     let clave = document.querySelector('#login_clave').value.trim();
     event.preventDefault();
 
     loguin(usuario,clave);

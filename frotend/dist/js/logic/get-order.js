@@ -51,7 +51,7 @@ botonTomarOrdenes.addEventListener('click', event => {
 
         //Guardar Orden Local Storage
         let pedido = []; 
-        pedido[incremento] = [nombre.value, plato.value, bebida.value, postre.value , fechaModificada];
+        pedido[incremento] = [nombre.value.trim(), plato.value, bebida.value, postre.value , fechaModificada];
         sessionStorage.setItem("pedido"+incremento, JSON.stringify(pedido[incremento]));
 
         document.getElementById("nombreCliente").value =  "";
@@ -73,6 +73,7 @@ botonTomarOrdenes.addEventListener('click', event => {
           alert("!Ordenes Tomadas!");
           //AQUI GUARDAR DATOS DE LA ORDEN
           prepararPaginaOrdenes();
+          window.location.replace("facturar.html");  
         }
    }
 
