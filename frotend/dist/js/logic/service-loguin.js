@@ -23,7 +23,7 @@ let response;
         response = await axios.post('http://localhost:8080/users/logins',{
            "name":name,
            "password":password
-      })
+      });
 
       if(response.data == 'User signed-in successfully!')
       {

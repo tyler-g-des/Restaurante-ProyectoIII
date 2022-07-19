@@ -28,6 +28,7 @@ public class UserController{
     UserService userService;
     
     @GetMapping()
+    @ResponseStatus(HttpStatus.OK)
     @CrossOrigin (origins = "*")
     public ArrayList<Users> getUsers()
     {
@@ -64,6 +65,7 @@ public class UserController{
     }
 
     @PostMapping("/getUserName")
+    @ResponseStatus(HttpStatus.OK)
     @CrossOrigin(origins = "*")
     public Users getUserName(@RequestBody Users user)
     {
@@ -81,6 +83,7 @@ public class UserController{
 
 
     @PostMapping("/getUserComplete")
+    @ResponseStatus(HttpStatus.OK)
     @CrossOrigin(origins = "*")
     public Users getUserComplete(@RequestBody Users user)
     {

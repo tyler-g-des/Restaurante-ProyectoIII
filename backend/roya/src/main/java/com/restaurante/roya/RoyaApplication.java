@@ -18,7 +18,10 @@ public class RoyaApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/users").allowedOrigins("*");
+				registry.addMapping("/users").allowedOrigins("*","http://localhost:8080");
+				registry.addMapping("/users").allowedOrigins("http://localhost:8080");
+				registry.addMapping("/tablets").allowedOrigins("*","http://localhost:8080");
+				registry.addMapping("/Inventory").allowedOrigins("http://localhost:8080");
 			}
 		};
 	}

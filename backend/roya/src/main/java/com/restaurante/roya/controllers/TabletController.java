@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+
 
 import com.restaurante.roya.models.Tablets;
 import com.restaurante.roya.services.TabletService;
@@ -25,6 +28,7 @@ public class TabletController {
     TabletService tabletService;
 
     @GetMapping()
+    @ResponseStatus(HttpStatus.OK)
     @CrossOrigin (origins = "*")
     public ArrayList<Tablets> getTablet()
     {
@@ -32,6 +36,7 @@ public class TabletController {
     }
 
     @PostMapping()
+    @ResponseStatus(HttpStatus.OK)
     @CrossOrigin (origins = "*")
     public Tablets saveTablet(@RequestBody Tablets user)
     {
@@ -39,6 +44,7 @@ public class TabletController {
     }
 
     @GetMapping(path = "/{id}")
+    @ResponseStatus(HttpStatus.OK)
     @CrossOrigin (origins = "*")
     public Optional<Tablets> getTabletId(@PathVariable("id") Long id)
     {
