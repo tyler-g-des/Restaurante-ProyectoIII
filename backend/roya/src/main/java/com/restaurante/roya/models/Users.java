@@ -16,16 +16,23 @@ public class Users{
     @Column(nullable = false)
     private String name;
     
+    @Column(nullable = false)
     private String email;
 
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    private String phone;
+
+    @Column(nullable = false)
+    private String address;
+
+    @Column(nullable = false)
     private boolean active;
 
     @Column(nullable = false)
     private String rol;
-
     
     public Long getId()
     {
@@ -85,5 +92,25 @@ public class Users{
     public void setRol(String rol)
     {
         this.rol = rol;
+    }
+
+    public String getPhone()
+    {
+       return phone;
+    }
+
+    public void setPhone(String phone)
+    {
+        this.phone = phone;
+    }
+
+    public String getAddress()
+    {
+       return address;
+    }
+
+    public void setAddrees(String address)
+    {
+        this.address = address;
     }
 }

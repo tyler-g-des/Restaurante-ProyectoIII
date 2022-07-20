@@ -30,9 +30,3 @@ const getUser = async () => {
 };
 
 getUser();
-
-/*
-campoName.textContent = response.promiseResult.data.name;
-campoRol.textContent = response.data.rol;
-campoEmail.textContent = response.data.email;
-*/
