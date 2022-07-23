@@ -14,6 +14,7 @@ let rol = localStorage.getItem('rol');
 let email = localStorage.getItem('email');
 let address = localStorage.getItem('address');
 let phone = localStorage.getItem('phone');
+let password = localStorage.getItem('password');
 let response;
 
 const getUser = async () => {
@@ -39,7 +40,6 @@ const getUser = async () => {
 };
 
 const setUser = async () => {
-
   try{
      response = await axios.post('http://localhost:8080/users',{
       "id":id,
@@ -49,7 +49,7 @@ const setUser = async () => {
       "address":campoDireccion.value,
       "phone":campoTelefono.value,
       "active":true,
-      "password":'1234'
+      "password":password
     });
 
     localStorage.clear();
@@ -72,7 +72,6 @@ const setUser = async () => {
 
 
 getUser();
-
 
 
 botonActualizar.addEventListener('click', event => {

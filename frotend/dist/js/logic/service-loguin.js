@@ -1,8 +1,9 @@
 const boton = document.querySelector('#btn');
+const botonRegistrar = document.querySelector("#btnRegistrar");
 const formulario = document.querySelector('#loguinForm');
 let response;
 
-
+   //Eventos
    formulario.addEventListener('submit', event => {
     event.preventDefault();
     console.log('Envio del formulario');  
@@ -16,10 +17,14 @@ let response;
     loguin(usuario,clave);
    });
 
+   botonRegistrar.addEventListener('click', event => {
+    window.location.replace("pages/user/registrarUsuario.html"); 
+   });
   
+   // LOGIAR
     const loguin = async (name,password) => {
 
-      try{
+      try{  
         response = await axios.post('http://localhost:8080/users/logins',{
            "name":name,
            "password":password
@@ -56,54 +61,5 @@ let response;
           localStorage.setItem('email',response.data.email);
           localStorage.setItem('phone',response.data.phone);
           localStorage.setItem('address',response.data.address);
+          localStorage.setItem('password',response.data.password);
     }
-
-    /*
-    const mesaEstados = async () => {
-      const response = await axios.get('http://localhost:8080/tablets',{
-     });
-     console.log(response);
-    }
-     */
-    /*
-    loguins = async function (Data)  {
-        axios({
-        method: 'post',
-        url:'http://localhost:8080/users/loguins',
-        headers: {
-          'Access-Control-Allow-Origin' : '*',
-          'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',},
-        data: Data
-      })
-      .then(res => {
-        response = res.data;
-        if(res.data == 'User signed-in successfully!')
-        {
-          console.log(res.data);
-        // window.location.href = "dashboard.html";
-        }
-        if(res.data == 'Not found')
-        {
-          alert("usuario no valido");
-          console.log('log antes de llamada ' + response);
-        }
-      })
-      .catch(err =>{
-        console.log(err);
-        console.log(err.message);
-      });
-    };
-
-    //get user with axios 
-   getUser = () => {
-    axios({
-      method: 'get',
-      url: 'http://localhost:8080/users',
-      headers: {
-      'Access-Control-Allow-Origin' : '*',
-      'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-      'Access-Control-Allow-Headers':'Content-Type, Authorization,*',},
-    }).then(res => console.log(res))
-    .catch((err) => console.log(err));
-   }; 
-   */
