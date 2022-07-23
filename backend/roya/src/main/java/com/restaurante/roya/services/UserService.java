@@ -86,6 +86,29 @@ public class UserService{
         }
         return null;
     }
+
+    public ArrayList<Users> updateUser(Users user)
+    {
+
+        ArrayList<Users> usuarios = (ArrayList<Users>) userRepository.findAll();
+        
+        for (Users users : usuarios) {
+            if(users.getName().equals(user.getName())){
+
+                if(users.getRol().equals(user.getRol()))
+                {
+                    if(users.getEmail().equals(user.getEmail())){
+                        userRepository.save(user);
+                        return userRepository.findByName(user.getName());
+                    }
+                    return null;
+                }
+                return null;
+            }
+        }
+        return null;
+
+    }
 /*
     @Override
     public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {

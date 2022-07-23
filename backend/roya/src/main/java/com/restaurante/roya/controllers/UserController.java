@@ -98,4 +98,22 @@ public class UserController{
         }
         return null;
     }
+
+    @PostMapping("/setUpdateUser")
+    @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin(origins = "*")
+    public Users setUpdateUser(@RequestBody Users user)
+    {
+        if(this.userService.updateUser(user) != null){
+
+            ArrayList<Users> listUser = userService.updateUser(user);
+
+            for (Users userFind : listUser) {
+
+                return userFind;
+            }
+        }
+        return null;        
+    }
+
 }

@@ -50,9 +50,12 @@ let response;
           "name":name,
           "password":password
         })
+          localStorage.setItem('id',response.data.id);
           localStorage.setItem('name',response.data.name);
           localStorage.setItem('rol',response.data.rol);
           localStorage.setItem('email',response.data.email);
+          localStorage.setItem('phone',response.data.phone);
+          localStorage.setItem('address',response.data.address);
     }
 
     /*
