@@ -63,3 +63,8 @@ let response;
           localStorage.setItem('address',response.data.address);
           localStorage.setItem('password',response.data.password);
     }
+
+    let detector = navigator.userAgent;
+
+   alert(detector);
+   alert(detector);

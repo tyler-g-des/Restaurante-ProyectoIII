@@ -1,4 +1,3 @@
-document.querySelector("#nombreUsuario").textContent = localStorage.getItem('name');
 document.querySelector("#nombreUsuarioFactura").textContent = localStorage.getItem('name');
 
 document.querySelector("#correoUsuario").textContent = "Email: " + localStorage.getItem('email');
