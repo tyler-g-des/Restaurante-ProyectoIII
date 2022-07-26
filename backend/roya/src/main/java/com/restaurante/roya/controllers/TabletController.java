@@ -50,4 +50,12 @@ public class TabletController {
     {
         return this.tabletService.getTabletId(id);
     }
+
+    @GetMapping("/getTabletsAvalible")
+    @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin (origins = "*")
+    public ArrayList<Tablets> getTabletAvalible()
+    {
+        return tabletService.getTabletsAvalible();
+    }
 }
