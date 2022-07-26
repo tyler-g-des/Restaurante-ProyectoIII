@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.restaurante.roya.models.Plates;
 
 @Repository
-public interface plateRepository extends CrudRepository<Plates,Long> {
+public interface PlateRepository extends CrudRepository<Plates,Long> {
     
 }
