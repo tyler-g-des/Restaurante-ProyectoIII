@@ -3,7 +3,6 @@ package com.restaurante.roya.services;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import org.hibernate.annotations.Tables;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +33,6 @@ public class TabletService {
 
     public ArrayList<Tablets> getTabletsAvalible()
     {
-
         ArrayList<Tablets> table = (ArrayList<Tablets>) tabletRepository.findAll();
         ArrayList<Tablets> tableAvalible = new ArrayList<>();
 
@@ -45,9 +43,7 @@ public class TabletService {
                tableAvalible.add(tabletFind);
             }
         }
-
         return tableAvalible;
-
     }
 
 }
