@@ -1,10 +1,16 @@
 document.querySelector("#nombreUsuario").textContent = localStorage.getItem('name');
+let bodyDocument = document.getElementsByTagName("body");
+let mesasDisponibles;
+
+//Formulario
+let mesa = document.querySelector("#mesa");
+
+
 
 // Acciones de redireccion - esto es para que al salir se cancele la oferta
 const botonRoya = document.querySelector("#redireccionRoya");
 const botonMesa = document.querySelector("#redireccionMesas");
 const botonEditarUsuario = document.querySelector("#editarUsuarioRedireccion");
-
 
 // Acciones 
 const botonIniciarPedido = document.querySelector("#iniciarPedido");
@@ -16,7 +22,6 @@ let incremento=0;
 let fecha = new Date();
 let hora = fecha.getHours() + ':' + fecha.getMinutes() + ':' + fecha.getSeconds();
 document.getElementById("fecha").value =  fecha.toJSON().slice(0,10);
-
 
 //Obtener cantidad de personas
 botonIniciarPedido.addEventListener('click', event => {
@@ -79,7 +84,6 @@ botonTomarOrdenes.addEventListener('click', event => {
 
 });
 
-
 botonVolver.addEventListener('click', event => {
 
   if(botonVolver.textContent == "Cancelar Orden")
@@ -106,6 +110,7 @@ botonRoya.addEventListener('click', event => {
       }
  }
 });
+
 //Si vas a otro menu cancelaras la orden deseas salir igualmente?
 botonMesa.addEventListener('click', event => {
   if(botonVolver.textContent == "Cancelar Orden")
@@ -141,3 +146,19 @@ const prepararPaginaOrdenes = () => {
   botonVolver.textContent = "Volver"
   incremento = 0;
  }
+
+ const prepararComboMesas = async () => {
+   mesasDisponibles = await axios.get('http://localhost:8080/tablets/getTabletsAvalible',{
+  })
+
+ for(let i=0; i<=9; i++)
+ {
+   if(mesasDisponibles.data[i].status == 'Libre')
+   {
+    mesa.innerHTML += "<option selected>" + "mesa " + mesasDisponibles.data[i].id + " </option>";
+   }else{
+     i++;
+   }
+ }
+
+}

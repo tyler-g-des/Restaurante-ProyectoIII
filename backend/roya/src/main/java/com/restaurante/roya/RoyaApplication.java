@@ -20,7 +20,8 @@ public class RoyaApplication {
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/users").allowedOrigins("*","http://localhost:8080");
 				registry.addMapping("/users").allowedOrigins("http://localhost:8080");
-				registry.addMapping("/tablets").allowedOrigins("*","http://localhost:8080");
+				registry.addMapping("/tablets").allowedOrigins("*");
+				registry.addMapping("/tablets").allowedOrigins("http://localhost:8080");
 				registry.addMapping("/Inventory").allowedOrigins("http://localhost:8080");
 			}
 		};
