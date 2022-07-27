@@ -1,9 +1,10 @@
-/Users/tdiaz/Desktop/RESTAURANTE/backend/roya/src/main/java/com/restaurante/roya/models/Orders.java
 /Users/tdiaz/Desktop/RESTAURANTE/backend/roya/src/main/java/com/restaurante/roya/services/InventoryService.java
 /Users/tdiaz/Desktop/RESTAURANTE/backend/roya/src/main/java/com/restaurante/roya/repositories/UserRepository.java
 /Users/tdiaz/Desktop/RESTAURANTE/backend/roya/src/main/java/com/restaurante/roya/repositories/TabletRepository.java
+/Users/tdiaz/Desktop/RESTAURANTE/backend/roya/src/main/java/com/restaurante/roya/models/OrdersDetails.java
 /Users/tdiaz/Desktop/RESTAURANTE/backend/roya/src/main/java/com/restaurante/roya/models/Plates.java
 /Users/tdiaz/Desktop/RESTAURANTE/backend/roya/src/main/java/com/restaurante/roya/controllers/InventoryController.java
+/Users/tdiaz/Desktop/RESTAURANTE/backend/roya/src/main/java/com/restaurante/roya/repositories/OrderDetailRepository.java
 /Users/tdiaz/Desktop/RESTAURANTE/backend/roya/src/main/java/com/restaurante/roya/controllers/PlateController.java
 /Users/tdiaz/Desktop/RESTAURANTE/backend/roya/src/main/java/com/restaurante/roya/controllers/UserController.java
 /Users/tdiaz/Desktop/RESTAURANTE/backend/roya/src/main/java/com/restaurante/roya/services/UserService.java
@@ -12,7 +13,10 @@
 /Users/tdiaz/Desktop/RESTAURANTE/backend/roya/src/main/java/com/restaurante/roya/repositories/InventoryRepository.java
 /Users/tdiaz/Desktop/RESTAURANTE/backend/roya/src/main/java/com/restaurante/roya/services/PlateService.java
 /Users/tdiaz/Desktop/RESTAURANTE/backend/roya/src/main/java/com/restaurante/roya/controllers/TabletController.java
+/Users/tdiaz/Desktop/RESTAURANTE/backend/roya/src/main/java/com/restaurante/roya/services/OrderDetailService.java
+/Users/tdiaz/Desktop/RESTAURANTE/backend/roya/src/main/java/com/restaurante/roya/controllers/OrderController.java
 /Users/tdiaz/Desktop/RESTAURANTE/backend/roya/src/main/java/com/restaurante/roya/repositories/PlateRepository.java
 /Users/tdiaz/Desktop/RESTAURANTE/backend/roya/src/main/java/com/restaurante/roya/services/TabletService.java
+/Users/tdiaz/Desktop/RESTAURANTE/backend/roya/src/main/java/com/restaurante/roya/models/Order.java
 /Users/tdiaz/Desktop/RESTAURANTE/backend/roya/src/main/java/com/restaurante/roya/models/Tablets.java
 /Users/tdiaz/Desktop/RESTAURANTE/backend/roya/src/main/java/com/restaurante/roya/models/Inventory.java

@@ -4,7 +4,7 @@ const mesa =  document.querySelector('#titulo');
 let response;
 
 mesa.addEventListener('click', event => {
-    mesaEstados();      
+    //mesaEstados();      
 });
 
 

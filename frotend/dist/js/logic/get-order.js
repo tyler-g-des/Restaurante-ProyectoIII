@@ -5,8 +5,6 @@ let mesasDisponibles;
 //Formulario
 let mesa = document.querySelector("#mesa");
 
-
-
 // Acciones de redireccion - esto es para que al salir se cancele la oferta
 const botonRoya = document.querySelector("#redireccionRoya");
 const botonMesa = document.querySelector("#redireccionMesas");
