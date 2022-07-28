@@ -75,8 +75,7 @@ botonTomarOrdenes.addEventListener('click', event => {
         if(numeroPersonas.value == 0 || numeroPersonas ==  "0"){
           alert("!Ordenes Tomadas!");
           //AQUI GUARDAR DATOS DE LA ORDEN
-          prepararPaginaOrdenes();
-          window.location.replace("facturar.html");  
+          guardarDatos();
         }
    }
 
@@ -124,6 +123,7 @@ botonMesa.addEventListener('click', event => {
  }
 });
 
+// CANCELAR ORDER
 botonEditarUsuario.addEventListener('click', event => {
   if(botonVolver.textContent == "Cancelar Orden")
   {    
@@ -157,6 +157,40 @@ const prepararPaginaOrdenes = () => {
    }else{
      i++;
    }
+ }
+
+}
+
+
+const guardarDatos = async () => {
+let user;
+let mesaSelect;
+let valueMesa = mesa.value.slice(5,6);
+
+let fecha = document.querySelector("#fecha");
+let fechaModificada = fecha.value + " "  + hora;
+
+  try{
+    user = await axios.get('http://localhost:8080/users/'+localStorage.getItem('id'),{
+    });
+
+    mesaSelect = await axios.get('http://localhost:8080/tablets/'+valueMesa,{
+    });
+
+    const ordenSave = await axios.post('http://localhost:8080/orders',{
+      "user":user.data,
+      "date":fechaModificada,
+      "totalOrder":0,
+      "statusOrder":true,
+      "tablet":mesaSelect.data
+   });
+    alert("Orden Registrada con exito!!");
+    prepararPaginaOrdenes();
+    window.location.replace("facturar.html");  
+
+ }
+ catch(error){
+   alert("Problema al solicitar datos del usuario conexion fallida " + error);
  }
 
 }

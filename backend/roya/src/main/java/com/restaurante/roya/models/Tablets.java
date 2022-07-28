@@ -18,7 +18,7 @@ public class Tablets{
 
     private String description;
 
-    public long getId(){
+    public Long getId(){
         return id;
     }
 

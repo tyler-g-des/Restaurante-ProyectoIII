@@ -3,8 +3,8 @@ package com.restaurante.roya.controllers;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import com.restaurante.roya.models.Order;
-import com.restaurante.roya.services.OrderService;
+import com.restaurante.roya.models.OrdersDetails;
+import com.restaurante.roya.services.OrderDetailService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -19,36 +19,35 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/orders")
+@RequestMapping("/orderDetails")
 @Configuration
-public class OrderController{
+public class OrderDetailsController{
 
     @Autowired
-    OrderService orderService;
+    OrderDetailService orderDetailService;
     
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
     @CrossOrigin (origins = "*")
-    public ArrayList<Order> getOrder()
+    public ArrayList<OrdersDetails> getOrderDetails()
     {
-        return orderService.getOrder();
+        return orderDetailService.getOrderDetail();
     }
 
     @PostMapping()
     @ResponseStatus(HttpStatus.OK)
     @CrossOrigin (origins = "*")
-    public Order saveOrder(@RequestBody Order order)
+    public OrdersDetails getOrderDetails(@RequestBody OrdersDetails order)
     {
-        Long pp = (long) 1;
-        return this.orderService.saveOrder(order,pp,pp);
+        return this.orderDetailService.saveOrderDetail(order);
     }
 
     @GetMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     @CrossOrigin (origins = "*")
-    public Optional<Order> getOrderId(@PathVariable("id") Long id)
+    public Optional<OrdersDetails> getOrderDetailsId(@PathVariable("id") Long id)
     {
-        return this.orderService.getOrderId(id);
+        return this.orderDetailService.getOrderDetailId(id);
     }
      
 }

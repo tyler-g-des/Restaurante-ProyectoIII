@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -27,6 +28,9 @@ public class OrdersDetails {
 
     @Column(nullable = false)
     private String price;
+
+    @ManyToOne
+    private Order order;
 
 
     public Long getId()
@@ -78,5 +82,15 @@ public class OrdersDetails {
     public void setPrice(String price)
     {
         this.price = price;
+    }
+
+    public Order getOrder()
+    {
+        return order;
+    }
+
+    public void setOrder(Order order)
+    {
+        this.order = order;
     }
 }  

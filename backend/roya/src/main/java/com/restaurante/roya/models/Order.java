@@ -29,6 +29,9 @@ public class Order {
     @Column(nullable = false)
     private double totalOrder;
 
+    @Column(nullable = false)
+    private boolean statusOrder;
+
     public Long getId()
     {
         return id;
@@ -80,4 +83,13 @@ public class Order {
         this.totalOrder = totalOrder;
     }
 
+    public boolean getstatusOrder()
+    {
+        return statusOrder;
+    }
+
+    public void setStatusOrder(Boolean statusOrder)
+    {
+        this.statusOrder = statusOrder;
+    }
 }  
