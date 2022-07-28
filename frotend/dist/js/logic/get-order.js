@@ -1,5 +1,4 @@
 document.querySelector("#nombreUsuario").textContent = localStorage.getItem('name');
-let bodyDocument = document.getElementsByTagName("body");
 let mesasDisponibles;
 
 //Formulario
@@ -16,6 +15,7 @@ const botonTomarOrdenes = document.querySelector("#tomarOrdenes");
 const botonVolver = document.querySelector("#volverOrdenes");
 let footer;
 let incremento=0;
+
 // Fecha y hora
 let fecha = new Date();
 let hora = fecha.getHours() + ':' + fecha.getMinutes() + ':' + fecha.getSeconds();
@@ -24,7 +24,6 @@ document.getElementById("fecha").value =  fecha.toJSON().slice(0,10);
 //Obtener cantidad de personas
 botonIniciarPedido.addEventListener('click', event => {
    let numeroPersonas = document.getElementById("numeroPersona");
-   botonIniciarPedido
 });
 
 const evento = () => {
@@ -75,12 +74,14 @@ botonTomarOrdenes.addEventListener('click', event => {
         if(numeroPersonas.value == 0 || numeroPersonas ==  "0"){
           alert("!Ordenes Tomadas!");
           //AQUI GUARDAR DATOS DE LA ORDEN
-          guardarDatos();
+          window.location.replace("facturar.html");  
+          //crearOrdenes();
         }
    }
 
 });
 
+// ------------Redirecciones--------------- 
 botonVolver.addEventListener('click', event => {
 
   if(botonVolver.textContent == "Cancelar Orden")
@@ -94,7 +95,6 @@ botonVolver.addEventListener('click', event => {
   }
 });
 
-// Redirecciones
 botonRoya.addEventListener('click', event => {
   if(botonVolver.textContent == "Cancelar Orden")
   {    
@@ -107,7 +107,6 @@ botonRoya.addEventListener('click', event => {
       }
  }
 });
-
 //Si vas a otro menu cancelaras la orden deseas salir igualmente?
 botonMesa.addEventListener('click', event => {
   if(botonVolver.textContent == "Cancelar Orden")
@@ -122,7 +121,6 @@ botonMesa.addEventListener('click', event => {
       }
  }
 });
-
 // CANCELAR ORDER
 botonEditarUsuario.addEventListener('click', event => {
   if(botonVolver.textContent == "Cancelar Orden")
@@ -138,6 +136,9 @@ botonEditarUsuario.addEventListener('click', event => {
  }
 });
 
+
+
+// Logica cuando se sale de una pagina
 const prepararPaginaOrdenes = () => {
   sessionStorage.clear();
   window.location.replace("tomarOrdenes.html"); 
@@ -145,24 +146,26 @@ const prepararPaginaOrdenes = () => {
   incremento = 0;
  }
 
+ //Preparar Mesas disponibles
  const prepararComboMesas = async () => {
-   mesasDisponibles = await axios.get('http://localhost:8080/tablets/getTabletsAvalible',{
-  })
+  try
+  {
+     mesasDisponibles = await axios.get('http://localhost:8080/tablets/getTabletsAvalible',{
+     });
 
- for(let i=0; i<=9; i++)
- {
-   if(mesasDisponibles.data[i].status == 'Libre')
-   {
-    mesa.innerHTML += "<option selected>" + "mesa " + mesasDisponibles.data[i].id + " </option>";
-   }else{
-     i++;
-   }
- }
-
+     for(let i=0; i<=9; i++)
+     {
+        mesa.innerHTML += "<option selected>" + "mesa " + mesasDisponibles.data[i].id + " </option>";
+     }
+  }
+  catch(error)
+  {
+     //alert("Ocurrio un problema al cargar formulario intente mas tarde !!" + error);
+  }
 }
 
-
-const guardarDatos = async () => {
+//Crear Ordenes
+const crearOrdenes = async () => {
 let user;
 let mesaSelect;
 let valueMesa = mesa.value.slice(5,6);
@@ -192,5 +195,10 @@ let fechaModificada = fecha.value + " "  + hora;
  catch(error){
    alert("Problema al solicitar datos del usuario conexion fallida " + error);
  }
+
+}
+
+//Guardar Detalle de orden
+const crearDetalle = async () => {
 
 }
