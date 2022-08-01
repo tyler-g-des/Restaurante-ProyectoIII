@@ -20,7 +20,25 @@ let response;
    botonRegistrar.addEventListener('click', event => {
     window.location.replace("pages/user/registrarUsuario.html"); 
    });
-  
+   
+   // Validar si hay orden 
+   const validateOrder = async () => {
+
+    try{  
+       let order = await axios.get('http://localhost:8080/orders/getOrderActiveLoguin/'+localStorage.getItem('id'),{
+     });
+        if(order.data == "User order register"){
+          window.location.replace("pages/wait/inline.html");
+        }else{
+          window.location.replace("pages/order/tomarOrdenes.html");     
+        }
+     }
+     catch(error){
+      alert("Error al obtener informacion intente mas tarde !! " + error);
+     }
+  };
+
+
    // LOGIAR
     const loguin = async (name,password) => {
 
@@ -34,7 +52,7 @@ let response;
       {
         await dashboardPrepared(name,password);  
         if(localStorage.getItem(name) !== undefined){
-          window.location.replace("pages/order/tomarOrdenes.html");     
+          validateOrder();
         }
       }
       else if(response.data == 'Not found')
@@ -63,8 +81,3 @@ let response;
           localStorage.setItem('address',response.data.address);
           localStorage.setItem('password',response.data.password);
     }
-
-    let detector = navigator.userAgent;
-
-   alert(detector);
-   alert(detector);

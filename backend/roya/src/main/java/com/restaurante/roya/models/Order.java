@@ -30,7 +30,7 @@ public class Order {
     private double totalOrder;
 
     @Column(nullable = false)
-    private boolean statusOrder;
+    private String statusOrder;
 
     public Long getId()
     {
@@ -83,12 +83,12 @@ public class Order {
         this.totalOrder = totalOrder;
     }
 
-    public boolean getstatusOrder()
+    public String getstatusOrder()
     {
         return statusOrder;
     }
 
-    public void setStatusOrder(Boolean statusOrder)
+    public void setStatusOrder(String statusOrder)
     {
         this.statusOrder = statusOrder;
     }

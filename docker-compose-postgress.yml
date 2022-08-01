@@ -10,7 +10,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres    
     volumes:
-      - /Users/tdiaz/Desktop/data:/var/lib/postgresql/data
+      - /Users/tdiaz/Desktop/data:/var/lib/postgresql/pgdata
 
   adminer:
     container_name: adminer

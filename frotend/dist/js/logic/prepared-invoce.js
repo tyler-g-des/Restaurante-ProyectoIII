@@ -1,19 +1,19 @@
+let cuerpoTabla = document.querySelector("#cuerpoTabla");
 document.querySelector("#nombreUsuarioFactura").textContent = localStorage.getItem('name');
 
 document.querySelector("#correoUsuario").textContent = "Email: " + localStorage.getItem('email');
 document.querySelector("#numeroTelefono").textContent = "Phone: " + localStorage.getItem('phone');
 document.querySelector("#direccion").textContent = localStorage.getItem('address');
 
-
 let fecha = new Date();
 let hora = fecha.getHours() + ':' + fecha.getMinutes() + ':' + fecha.getSeconds();
 document.getElementById("fechaFacturacion").value =  fecha.toJSON().slice(0,10);
-
 
 let name = localStorage.getItem('name');
 let rol = localStorage.getItem('rol');
 let email = localStorage.getItem('email');
 let response;
+let response2;
 
 const getUser = async () => {
 
@@ -34,3 +34,22 @@ const getUser = async () => {
 
 getUser();
 
+const getOrdenDetail = async () => {
+
+  try{
+    response2 = await axios.get('http://localhost:8080/orderDetails',{  
+    });
+
+    for(let i=0; i<=response2.data.length-1; i++){       
+
+      cuerpoTabla.innerHTML += "<td>" + "1" + "</td>" + "<td>" + response2.data[i].plato + "</td>"  + 
+      "<td>" + response2.data[i].bebida + "</td>"  +  "<td>" + response2.data[i].postre + "</td>" +
+      "<td>" + response2.data[i].price + "</td>"; 
+    }
+  }
+  catch(error){
+    alert("Problema al solicitar datos del usuario conexion fallida " + error);
+  }
+};
+
+getOrdenDetail();

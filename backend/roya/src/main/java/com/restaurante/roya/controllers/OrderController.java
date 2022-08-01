@@ -9,6 +9,7 @@ import com.restaurante.roya.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,8 +40,7 @@ public class OrderController{
     @CrossOrigin (origins = "*")
     public Order saveOrder(@RequestBody Order order)
     {
-        Long pp = (long) 1;
-        return this.orderService.saveOrder(order,pp,pp);
+        return this.orderService.saveOrder(order);
     }
 
     @GetMapping(path = "/{id}")
@@ -51,4 +51,32 @@ public class OrderController{
         return this.orderService.getOrderId(id);
     }
      
+    @PostMapping("/getOrderActive")
+    @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin(origins = "*")
+    public Order getUserName(@RequestBody Order order)
+    {
+      if(orderService.getOrderActive(order) != null)
+      {
+        return orderService.getOrderActive(order);
+      }else{
+        return null;
+      }
+    }
+
+    @GetMapping(path = "/getOrderActiveLoguin/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin(origins = "*")
+    public ResponseEntity<String> getOrderActiveLoguin(@PathVariable("id") Long id)
+    {
+        if(this.orderService.getOrderActiveLoguin(id) != null)
+        {
+            return new ResponseEntity<>("User order register",HttpStatus.ACCEPTED);
+        }
+        else
+        {
+            return new ResponseEntity<>("Not found",HttpStatus.ACCEPTED);
+        }
+    }
+
 }

@@ -23,6 +23,7 @@ public class RoyaApplication {
 				registry.addMapping("/tablets").allowedOrigins("*");
 				registry.addMapping("/tablets").allowedOrigins("http://localhost:8080");
 				registry.addMapping("/Inventory").allowedOrigins("http://localhost:8080");
+				registry.addMapping("//orders").allowedOrigins("http://localhost:8080");
 			}
 		};
 	}

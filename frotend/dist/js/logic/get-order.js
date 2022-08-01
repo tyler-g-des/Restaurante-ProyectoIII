@@ -13,7 +13,6 @@ const botonEditarUsuario = document.querySelector("#editarUsuarioRedireccion");
 const botonIniciarPedido = document.querySelector("#iniciarPedido");
 const botonTomarOrdenes = document.querySelector("#tomarOrdenes");
 const botonVolver = document.querySelector("#volverOrdenes");
-let footer;
 let incremento=0;
 
 // Fecha y hora
@@ -69,13 +68,12 @@ botonTomarOrdenes.addEventListener('click', event => {
         //Logica cancelar Ordenes
         botonVolver.textContent = "Cancelar Orden"
         
-
         // Al completar los pedidos guardar en base de Datos y regresar a la pagina de tomar ordenes
         if(numeroPersonas.value == 0 || numeroPersonas ==  "0"){
           alert("!Ordenes Tomadas!");
           //AQUI GUARDAR DATOS DE LA ORDEN
-          window.location.replace("facturar.html");  
-          //crearOrdenes();
+          //window.location.replace("facturar.html");  
+          crearOrdenes(); 
         }
    }
 
@@ -160,18 +158,25 @@ const prepararPaginaOrdenes = () => {
   }
   catch(error)
   {
-     //alert("Ocurrio un problema al cargar formulario intente mas tarde !!" + error);
+    if(error.includes("Cannot read properties of undefined (reading 'id')"))
+    {
+    }
+    else{
+     alert("Ocurrio un problema al cargar formulario intente mas tarde !!" + error);
+      window.location.replace("index.html");     
+    }
   }
 }
 
 //Crear Ordenes
 const crearOrdenes = async () => {
-let user;
-let mesaSelect;
-let valueMesa = mesa.value.slice(5,6);
+  let user;
+  let mesaSelect;
+  let valueMesa = mesa.value.slice(5,6);
+  let ordenSave;
 
-let fecha = document.querySelector("#fecha");
-let fechaModificada = fecha.value + " "  + hora;
+  let fecha = document.querySelector("#fecha");
+  let fechaModificada = fecha.value + " "  + hora;
 
   try{
     user = await axios.get('http://localhost:8080/users/'+localStorage.getItem('id'),{
@@ -180,25 +185,96 @@ let fechaModificada = fecha.value + " "  + hora;
     mesaSelect = await axios.get('http://localhost:8080/tablets/'+valueMesa,{
     });
 
-    const ordenSave = await axios.post('http://localhost:8080/orders',{
+     ordenSave = await axios.post('http://localhost:8080/orders',{
       "user":user.data,
       "date":fechaModificada,
       "totalOrder":0,
-      "statusOrder":true,
+      "statusOrder":"creada",
       "tablet":mesaSelect.data
    });
+    localStorage.setItem('orden',ordenSave.data.id);
     alert("Orden Registrada con exito!!");
-    prepararPaginaOrdenes();
-    window.location.replace("facturar.html");  
-
+    await crearDetalle();
  }
- catch(error){
-   alert("Problema al solicitar datos del usuario conexion fallida " + error);
+ catch(error)
+ {
+   alert("Problema al registrar la orden " + error);
  }
 
 }
 
 //Guardar Detalle de orden
 const crearDetalle = async () => {
+  let user;
+  let mesaSelect;
+  let valueMesa = mesa.value.slice(5,6);
+  let order;
+  let respuesta=[];
 
+  try
+  {
+    user = await axios.get('http://localhost:8080/users/'+localStorage.getItem('id'),{
+    });
+
+    mesaSelect = await axios.get('http://localhost:8080/tablets/'+valueMesa,{
+    });
+
+    console.log(user.data);
+    console.log(mesaSelect.data);
+
+    order = await axios.post('http://localhost:8080/orders/getOrderActive',{
+      "user":user.data,
+      "statusOrder":"creada",
+      "tablet":mesaSelect.data
+    });
+
+    console.log(order.data)
+    for(let i=0; i<=incremento-1; i++)
+    {
+
+       //console.log(sessionStorage.getItem('pedido'+i));
+       respuesta[i] = JSON.parse(sessionStorage.getItem('pedido'+i));
+       console.log(respuesta[i][1]);
+       
+        const ordenDetailSave = await axios.post('http://localhost:8080/orderDetails',{
+           "plato": respuesta[i][1],
+           "bebida": respuesta[i][2],
+           "postre": respuesta[i][3],
+           "price": "1000",
+            "order": order.data
+       });
+    }
+    await ocuparMesa();
+    alert("se registro el detalle de la orden!!");
+    localStorage.setItem('mesa',valueMesa)
+    window.location.replace("../wait/inline.html"); 
+  }
+  catch(error)
+  {
+    console.log(error)
+    if(error=="TypeError: Cannot read properties of null (reading '1')")
+    {
+      alert("se registro la el detalle de la orden!!");
+      await ocuparMesa();
+      localStorage.setItem('mesa',valueMesa)
+      window.location.replace("../wait/inline.html"); 
+    }else{
+    alert("Problema al registrar detalle de la orden " + error);
+    }
+  }
 }
+
+ const ocuparMesa = async () => {
+  let valueMesa = mesa.value.slice(5,6);
+   try{
+     mesa = await axios.post('http://localhost:8080/tablets',{
+     "id":valueMesa,
+     "status":"Ocupada",
+     "description":"mesa"
+     });
+   }
+   catch(error)
+   {
+     alert("Error cambiando estado " +  error)
+   }
+ }

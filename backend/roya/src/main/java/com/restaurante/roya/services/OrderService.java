@@ -26,7 +26,7 @@ public class OrderService{
         return (ArrayList<Order>) orderRepository.findAll();
     }
 
-    public Order saveOrder(Order orders, Long idTablet, Long idUser)
+    public Order saveOrder(Order orders)
     {
 
         return orderRepository.save(orders);
@@ -34,6 +34,49 @@ public class OrderService{
 
     public Optional<Order> getOrderId(Long id) {
         return orderRepository.findById(id);
+    }
+
+    public Order getOrderActive(Order order)
+    {
+        ArrayList<Order> orders = (ArrayList<Order>) orderRepository.findAll();
+        
+        for (Order orderSelect : orders) 
+        {
+          if(orderSelect.getUser() != null && orderSelect.getTable() != null){
+              
+            if(orderSelect.getUser().getId() == order.getUser().getId())
+            {
+              if(orderSelect.getTable().getId() == order.getTable().getId())
+              {
+                if(orderSelect.getstatusOrder().equals(order.getstatusOrder()))
+                {
+                  return orderSelect;
+                }
+              }
+            }    
+          }  
+        }
+        return null;
+    }
+
+    public Order getOrderActiveLoguin(Long id)
+    {
+        ArrayList<Order> orders = (ArrayList<Order>) orderRepository.findAll();
+        
+        for (Order orderSelect : orders) 
+        {
+          if(orderSelect.getUser() != null){
+              
+            if(orderSelect.getUser().getId() == id)
+            {
+                if(orderSelect.getstatusOrder().equals("creada"))
+                {
+                  return orderSelect;
+                } 
+            }    
+          }  
+        }
+        return null;
     }
 
 }
