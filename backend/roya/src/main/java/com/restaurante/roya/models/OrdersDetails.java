@@ -26,9 +26,6 @@ public class OrdersDetails {
     @Column(nullable = false)
     private String postre;
 
-    @Column(nullable = false)
-    private String price;
-
     @ManyToOne
     private Order order;
 
@@ -72,16 +69,6 @@ public class OrdersDetails {
     public void setPostre(String postre)
     {
         this.postre = postre;
-    }
-
-    public String getPrice()
-    {
-        return price;
-    }
-
-    public void setPrice(String price)
-    {
-        this.price = price;
     }
 
     public Order getOrder()

@@ -14,6 +14,7 @@ let rol = localStorage.getItem('rol');
 let email = localStorage.getItem('email');
 let response;
 let response2;
+let ojala;
 
 const getUser = async () => {
 
@@ -31,7 +32,6 @@ const getUser = async () => {
     alert("Problema al solicitar datos del usuario conexion fallida " + error);
   }
 };
-
 getUser();
 
 const getOrdenDetail = async () => {
@@ -42,14 +42,31 @@ const getOrdenDetail = async () => {
 
     for(let i=0; i<=response2.data.length-1; i++){       
 
-      cuerpoTabla.innerHTML += "<td>" + "1" + "</td>" + "<td>" + response2.data[i].plato + "</td>"  + 
+      cuerpoTabla.innerHTML += "<td>" + "1" + "</td>" + "<td>" + response2.data[i].plato + " " + ojala + "</td>"  + 
       "<td>" + response2.data[i].bebida + "</td>"  +  "<td>" + response2.data[i].postre + "</td>" +
       "<td>" + response2.data[i].price + "</td>"; 
     }
+
+    console.log(response2)
   }
   catch(error){
     alert("Problema al solicitar datos del usuario conexion fallida " + error);
   }
 };
-
 getOrdenDetail();
+
+
+const obtenerPrecios = async (name) => 
+{
+ let plato;
+
+ plato = await axios.get('http://localhost:8080/plates',{
+ });
+
+ for(let i=0; i<= plato.data.length-1; i++)
+ {
+   if(plato.data[i].dish == name){
+       ojala = plato.data[i].price;
+   }
+ }
+};

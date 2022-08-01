@@ -19,9 +19,6 @@ public class Plates {
     private int price;
 
     @Column(nullable = false)
-    private int quantity;
-
-    @Column(nullable = false)
     private String dishDescription;
 
     public Long getId()
@@ -52,16 +49,6 @@ public class Plates {
     public void setPrice(int price)
     {
         this.price = price;
-    }
-
-    public int getQuantity()
-    {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity)
-    {
-        this.quantity = quantity;
     }
 
     public String getDishDescription()

@@ -1,3 +1,5 @@
+document.querySelector("#nombreUsuario").textContent = localStorage.getItem('name');
+
 let porciento = document.getElementById("porciento");
 let texto = document.getElementById("texto");
 let button = document.getElementById("facturar");

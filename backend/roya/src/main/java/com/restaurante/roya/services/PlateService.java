@@ -28,4 +28,15 @@ public class PlateService {
     public Optional<Plates> getPlateId(Long id) {
         return plateRepository.findById(id);
     }
+
+    public Plates getPlateName(String name) {
+        
+        ArrayList<Plates> platos = (ArrayList<Plates>) plateRepository.findAll();
+        for (Plates plato : platos) {
+            if(plato.getDish() == name){
+               return plato;
+            }
+        }
+        return null;
+    }
 }

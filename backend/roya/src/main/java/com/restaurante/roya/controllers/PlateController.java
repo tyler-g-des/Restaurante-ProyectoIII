@@ -49,4 +49,12 @@ public class PlateController {
     {
         return this.plateService.getPlateId(id);
     }
+
+    @GetMapping(path = "/{dish}")
+    @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin (origins = "*")
+    public Plates getPlateName(@PathVariable("dish") String dish)
+    {
+        return this.plateService.getPlateName(dish);
+    }
 }

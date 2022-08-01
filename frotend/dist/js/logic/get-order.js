@@ -1,5 +1,7 @@
 document.querySelector("#nombreUsuario").textContent = localStorage.getItem('name');
 let mesasDisponibles;
+let platos;
+let ojala;
 
 //Formulario
 let mesa = document.querySelector("#mesa");
@@ -40,7 +42,6 @@ botonTomarOrdenes.addEventListener('click', event => {
      alert("Es necesario llenar el campo Nombre");
    }
    else{
-
        let numeroPersonas = document.getElementById("numeroPersona");
 
         //Formulario para la orden 
@@ -151,21 +152,74 @@ const prepararPaginaOrdenes = () => {
      mesasDisponibles = await axios.get('http://localhost:8080/tablets/getTabletsAvalible',{
      });
 
-     for(let i=0; i<=9; i++)
+     for(let i=0; i<=mesasDisponibles.data.length-1; i++)
      {
         mesa.innerHTML += "<option selected>" + "mesa " + mesasDisponibles.data[i].id + " </option>";
      }
   }
   catch(error)
   {
-    if(error.includes("Cannot read properties of undefined (reading 'id')"))
-    {
-    }
-    else{
+
      alert("Ocurrio un problema al cargar formulario intente mas tarde !!" + error);
-      window.location.replace("index.html");     
-    }
+      window.location.replace("../../index.html");     
   }
+}
+
+// ---------------------- API -------------------
+//Preparar 
+const prepararPlatos = async () => {
+  let platoHTML = document.querySelector("#plato");
+  let bebidaHTML = document.querySelector("#bebida");
+  let postreHTML = document.querySelector("#postre");
+
+  let bebida=[];
+  let plato=[];
+  let postre=[];
+  let incremento1=0;
+  let incremento2=0;
+  let incremento3=0;
+
+   try
+   {
+      platos = await axios.get("http://localhost:8080/plates",{
+      });
+
+      for(let i=0; i<=platos.data.length-1; i++){
+            if(platos.data[i].dishDescription == "plato")
+            {
+                plato[incremento1] = platos.data[i].dish;
+                incremento1 ++;
+            }
+            if(platos.data[i].dishDescription == "bebida")
+            {
+               bebida[incremento2] = platos.data[i].dish;
+               incremento2 ++;
+            }
+            if(platos.data[i].dishDescription == "postre")
+            {
+               postre[incremento3] = platos.data[i].dish;
+               incremento3++;
+            }
+      }
+
+      //llenar combo
+      for(let i=0; i<=plato.length-1; i++){
+        platoHTML.innerHTML += "<option>" + plato[i]+ "</option>"
+      }
+
+      for(let ii=0; ii<=postre.length-1; ii++){
+        postreHTML.innerHTML += "<option>" + postre[ii]+ "</option>"
+      }
+
+      for(let iii=0; iii<=bebida.length-1; iii++){
+        bebidaHTML.innerHTML += "<option>" + bebida[iii]+ "</option>"
+      }
+     
+   }
+   catch(error){
+    alert("Ocurrio un problema al cargar formulario intente mas tarde platos!!" + error);
+      window.location.replace("../../index.html");    
+   }
 }
 
 //Crear Ordenes
@@ -210,17 +264,16 @@ const crearDetalle = async () => {
   let valueMesa = mesa.value.slice(5,6);
   let order;
   let respuesta=[];
+  let precio;
 
   try
   {
+ 
     user = await axios.get('http://localhost:8080/users/'+localStorage.getItem('id'),{
     });
 
     mesaSelect = await axios.get('http://localhost:8080/tablets/'+valueMesa,{
     });
-
-    console.log(user.data);
-    console.log(mesaSelect.data);
 
     order = await axios.post('http://localhost:8080/orders/getOrderActive',{
       "user":user.data,
@@ -228,21 +281,18 @@ const crearDetalle = async () => {
       "tablet":mesaSelect.data
     });
 
-    console.log(order.data)
-    for(let i=0; i<=incremento-1; i++)
+    console.log(order.data);
+    for(let i=0; i<=incremento; i++)
     {
-
        //console.log(sessionStorage.getItem('pedido'+i));
        respuesta[i] = JSON.parse(sessionStorage.getItem('pedido'+i));
-       console.log(respuesta[i][1]);
        
         const ordenDetailSave = await axios.post('http://localhost:8080/orderDetails',{
            "plato": respuesta[i][1],
            "bebida": respuesta[i][2],
            "postre": respuesta[i][3],
-           "price": "1000",
-            "order": order.data
-       });
+           "order": order.data,
+       }); 
     }
     await ocuparMesa();
     alert("se registro el detalle de la orden!!");
