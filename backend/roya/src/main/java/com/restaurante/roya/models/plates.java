@@ -2,6 +2,8 @@ package com.restaurante.roya.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -9,13 +11,14 @@ import javax.persistence.Table;
 @Table(name = "plates")
 public class Plates {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
     private Long id;
 
     @Column(unique = true, nullable = false)
     private String dish;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private int price;
 
     @Column(nullable = false)

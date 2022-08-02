@@ -28,11 +28,17 @@ let response;
        let order = await axios.get('http://localhost:8080/orders/getOrderActiveLoguin/'+localStorage.getItem('id'),{
      });
         if(order.data == "User order register"){
+          alert("Tienes una orden en proceso");
           window.location.replace("pages/wait/inline.html");
-        }else{
+        }
+        if(order.data == "User order prepared"){
+          alert("Tienes una orden preparada");
+          window.location.replace("pages/wait/inline.html");
+        }
+        else{
           window.location.replace("pages/order/tomarOrdenes.html");     
         }
-     }
+    }
      catch(error){
       alert("Error al obtener informacion intente mas tarde !! " + error);
      }

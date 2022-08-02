@@ -43,5 +43,6 @@ const crearDetalle = async () => {
     catch(error)
     {
       alert("Problema al registrar detalle de la orden " + error);
+      window.location.replace("../../index.html");
     }
   }

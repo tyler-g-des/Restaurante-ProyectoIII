@@ -2,7 +2,7 @@ document.querySelector("#nombreUsuario").textContent = localStorage.getItem('nam
 let mesasDisponibles;
 let platos;
 let ojala;
-
+let rol = localStorage.getItem('rol');
 //Formulario
 let mesa = document.querySelector("#mesa");
 
@@ -27,6 +27,7 @@ botonIniciarPedido.addEventListener('click', event => {
    let numeroPersonas = document.getElementById("numeroPersona");
 });
 
+// Evento boton sin accion
 const evento = () => {
   click_event = new CustomEvent('click');
  btn_element = document.querySelector('#iniciarPedido');
@@ -80,7 +81,11 @@ botonTomarOrdenes.addEventListener('click', event => {
 
 });
 
-// ------------Redirecciones--------------- 
+
+
+// ----------------------------------------------
+// ----------------------------------------------
+// ------------Redirecciones---------------------
 botonVolver.addEventListener('click', event => {
 
   if(botonVolver.textContent == "Cancelar Orden")
@@ -135,8 +140,6 @@ botonEditarUsuario.addEventListener('click', event => {
  }
 });
 
-
-
 // Logica cuando se sale de una pagina
 const prepararPaginaOrdenes = () => {
   sessionStorage.clear();
@@ -165,6 +168,12 @@ const prepararPaginaOrdenes = () => {
   }
 }
 
+
+
+
+
+// ----------------------------------------------
+// ----------------------------------------------
 // ---------------------- API -------------------
 //Preparar 
 const prepararPlatos = async () => {
@@ -226,7 +235,7 @@ const prepararPlatos = async () => {
 const crearOrdenes = async () => {
   let user;
   let mesaSelect;
-  let valueMesa = mesa.value.slice(5,6);
+  let valueMesa = mesa.value.slice(5,7);
   let ordenSave;
 
   let fecha = document.querySelector("#fecha");
@@ -246,6 +255,7 @@ const crearOrdenes = async () => {
       "statusOrder":"creada",
       "tablet":mesaSelect.data
    });
+  
     localStorage.setItem('orden',ordenSave.data.id);
     alert("Orden Registrada con exito!!");
     await crearDetalle();
@@ -261,10 +271,9 @@ const crearOrdenes = async () => {
 const crearDetalle = async () => {
   let user;
   let mesaSelect;
-  let valueMesa = mesa.value.slice(5,6);
+  let valueMesa = mesa.value.slice(5,7);
   let order;
   let respuesta=[];
-  let precio;
 
   try
   {
@@ -284,7 +293,6 @@ const crearDetalle = async () => {
     console.log(order.data);
     for(let i=0; i<=incremento; i++)
     {
-       //console.log(sessionStorage.getItem('pedido'+i));
        respuesta[i] = JSON.parse(sessionStorage.getItem('pedido'+i));
        
         const ordenDetailSave = await axios.post('http://localhost:8080/orderDetails',{
@@ -297,7 +305,7 @@ const crearDetalle = async () => {
     await ocuparMesa();
     alert("se registro el detalle de la orden!!");
     localStorage.setItem('mesa',valueMesa)
-    window.location.replace("../wait/inline.html"); 
+    window.location.replace("../tablet/inline.html"); 
   }
   catch(error)
   {
@@ -315,7 +323,7 @@ const crearDetalle = async () => {
 }
 
  const ocuparMesa = async () => {
-  let valueMesa = mesa.value.slice(5,6);
+  let valueMesa = mesa.value.slice(5,7);
    try{
      mesa = await axios.post('http://localhost:8080/tablets',{
      "id":valueMesa,
@@ -328,3 +336,27 @@ const crearDetalle = async () => {
      alert("Error cambiando estado " +  error)
    }
  }
+
+ const validateOrder = async () => {
+
+  try{  
+     let order = await axios.get('http://localhost:8080/orders/getOrderActiveLoguin/'+localStorage.getItem('id'),{
+   });
+   if(rol != "administrador")
+   {
+      if(order.data == "User order register"){
+        alert("Tienes una orden en proceso");
+        window.location.replace("../pages/wait/inline.html");
+      }else{
+       //  window.location.replace("tomarOrdenes.html");     
+      }
+    }else{
+      window.location.replace("../tablet/verMesas.html");
+    }
+   }
+   catch(error){
+    alert("Error al obtener informacion intente mas tarde !! " + error);
+   }
+};
+
+validateOrder();

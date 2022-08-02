@@ -79,4 +79,24 @@ public class OrderService{
         return null;
     }
 
+    public Order getOrderActivePrepared(Long id)
+    {
+        ArrayList<Order> orders = (ArrayList<Order>) orderRepository.findAll();
+        
+        for (Order orderSelect : orders) 
+        {
+          if(orderSelect.getUser() != null){
+              
+            if(orderSelect.getUser().getId() == id)
+            {
+                if(orderSelect.getstatusOrder().equals("preparada"))
+                {
+                  return orderSelect;
+                } 
+            }    
+          }  
+        }
+        return null;
+    }
+
 }

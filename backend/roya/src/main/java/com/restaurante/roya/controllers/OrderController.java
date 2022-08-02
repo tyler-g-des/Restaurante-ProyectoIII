@@ -73,10 +73,16 @@ public class OrderController{
         {
             return new ResponseEntity<>("User order register",HttpStatus.ACCEPTED);
         }
+        if(this.orderService.getOrderActivePrepared(id) != null)
+        {
+            return new ResponseEntity<>("User order prepared",HttpStatus.ACCEPTED);
+        }
         else
         {
             return new ResponseEntity<>("Not found",HttpStatus.ACCEPTED);
         }
+
+
     }
 
 }

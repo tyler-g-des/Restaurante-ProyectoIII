@@ -14,11 +14,17 @@ const prepararOrden = async (mesa) => {
   
       order = await axios.get('http://localhost:8080/orders',{
      });
+
+    }
+    catch(error)
+    {
+      alert("Problema al obtener la orden " + error);
+    } 
   
      console.log(mesaSelect.data)
-     console.log(order.data.length);
      console.log(order.data[0].table)
 
+    try{
      for(let i=0; i<=order.data.length; i++){       
       if(order.data[i].table.id == mesa){
         if(order.data[i].table.status == "Ocupada"){
@@ -30,21 +36,17 @@ const prepararOrden = async (mesa) => {
            "statusOrder":"preparada",
            "tablet":order.data[i].table
           });
+          i=order.data.length+1;
         }
       }
      } 
      alert("Orden entregada");
-      window.location.replace("../wait/inline.html"); 
     }
     catch(error)
     {
-      if(error == "TypeError: Cannot read properties of null (reading 'id')" || error == "TypeError: Cannot read properties of undefined (reading 'table')"){
-          alert("Orden entregada");
-          window.location.replace("../wait/inline.html"); 
-      }else{
-      alert("Problema alactualizar la mesa " + error);
-      }
+      alert("error al entregar la orden " + error)
     }
+    
 }
 
 const mesaEstados = async () => {
@@ -53,10 +55,7 @@ const mesaEstados = async () => {
          response = await axios.get('http://localhost:8080/tablets',{
         });
     } catch (error) {
-        console.log("aqui " + error)
-       // if(error.includes("Network Error")){
-           alert("Problema al solicitar datos de la Mesas")
-       // }
+           alert("Problema al solicitar datos de la Mesas" + error)
     }
 
   let mesaNumber = 1;  
@@ -87,7 +86,7 @@ const mesaEstados = async () => {
 
 }
 
-//Mesas redirecciones 
+// ------------ Mesas redirecciones 
 let mesa1 = document.querySelector("#mesa1-redireccion");
 mesa1.addEventListener('click', event => {
     if(document.querySelector('#mesa1-color').className.includes("bg-warning"))
