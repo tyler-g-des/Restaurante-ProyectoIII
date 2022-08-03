@@ -35,6 +35,9 @@ let response;
           alert("Tienes una orden entregada pendiente de factura");
           window.location.replace("pages/wait/inline.html");
         }
+        else{
+          window.location.replace("pages/tablet/verMesas.html")
+        }
         
     }
      catch(error){
