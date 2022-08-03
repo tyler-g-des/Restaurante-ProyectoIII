@@ -17,7 +17,24 @@ public class PlateService {
 
     public ArrayList<Plates> getPlate()
     {
-        return (ArrayList<Plates>) plateRepository.findAll();
+        ArrayList<Plates> tablets = (ArrayList<Plates>)  plateRepository.findAll();
+        ArrayList<Plates> tablesNept = new ArrayList<Plates>();
+
+        Long menor = (long) 1;
+
+        while(menor <= 10)
+        {
+            for (Plates tablet : tablets) 
+            {
+                if(tablet.getId() == menor)
+                {
+                   tablesNept.add(tablet);
+                }
+            }
+            menor ++;
+           
+       }
+       return (tablesNept);
     }
 
     public Plates savePlate(Plates plate)

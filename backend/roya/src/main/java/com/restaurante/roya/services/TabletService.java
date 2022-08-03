@@ -18,8 +18,27 @@ public class TabletService {
     
     public ArrayList<Tablets> getTablets()
     {
-        return (ArrayList<Tablets>) tabletRepository.findAll();
+    
+        ArrayList<Tablets> tablets = (ArrayList<Tablets>)  tabletRepository.findAll();
+        ArrayList<Tablets> tablesNept = new ArrayList<Tablets>();
+
+        Long menor = (long) 1;
+
+        while(menor <= 10)
+        {
+            for (Tablets tablet : tablets) 
+            {
+                if(tablet.getId() == menor)
+                {
+                   tablesNept.add(tablet);
+                }
+            }
+            menor ++;
+           
+       }
+       return (tablesNept);
     }
+
 
     public Tablets saveTablet(Tablets tablet)
     {

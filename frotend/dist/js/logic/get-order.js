@@ -22,6 +22,10 @@ let fecha = new Date();
 let hora = fecha.getHours() + ':' + fecha.getMinutes() + ':' + fecha.getSeconds();
 document.getElementById("fecha").value =  fecha.toJSON().slice(0,10);
 
+
+
+// ----------------------------------------------
+// ----------------------------------------------
 //Obtener cantidad de personas
 botonIniciarPedido.addEventListener('click', event => {
    let numeroPersonas = document.getElementById("numeroPersona");
@@ -140,42 +144,12 @@ botonEditarUsuario.addEventListener('click', event => {
  }
 });
 
-// Logica cuando se sale de una pagina
-const prepararPaginaOrdenes = () => {
-  sessionStorage.clear();
-  window.location.replace("tomarOrdenes.html"); 
-  botonVolver.textContent = "Volver"
-  incremento = 0;
- }
-
- //Preparar Mesas disponibles
- const prepararComboMesas = async () => {
-  try
-  {
-     mesasDisponibles = await axios.get('http://localhost:8080/tablets/getTabletsAvalible',{
-     });
-
-     for(let i=0; i<=mesasDisponibles.data.length-1; i++)
-     {
-        mesa.innerHTML += "<option selected>" + "mesa " + mesasDisponibles.data[i].id + " </option>";
-     }
-  }
-  catch(error)
-  {
-
-     alert("Ocurrio un problema al cargar formulario intente mas tarde !!" + error);
-      window.location.replace("../../index.html");     
-  }
-}
-
-
-
 
 
 // ----------------------------------------------
 // ----------------------------------------------
-// ---------------------- API -------------------
-//Preparar 
+// ---------------------- Preparar --------------
+// preparar plato
 const prepararPlatos = async () => {
   let platoHTML = document.querySelector("#plato");
   let bebidaHTML = document.querySelector("#bebida");
@@ -231,6 +205,39 @@ const prepararPlatos = async () => {
    }
 }
 
+// Logica cuando se sale de una pagina
+const prepararPaginaOrdenes = () => {
+  sessionStorage.clear();
+  window.location.replace("tomarOrdenes.html"); 
+  botonVolver.textContent = "Volver"
+  incremento = 0;
+ }
+
+ //Preparar Mesas disponibles
+ const prepararComboMesas = async () => {
+  try
+  {
+     mesasDisponibles = await axios.get('http://localhost:8080/tablets/getTabletsAvalible',{
+     });
+
+     for(let i=0; i<=mesasDisponibles.data.length-1; i++)
+     {
+        mesa.innerHTML += "<option selected>" + "mesa " + mesasDisponibles.data[i].id + " </option>";
+     }
+  }
+  catch(error)
+  {
+
+     alert("Ocurrio un problema al cargar formulario intente mas tarde !!" + error);
+      window.location.replace("../../index.html");     
+  }
+}
+
+
+
+// ----------------------------------------------
+// ----------------------------------------------
+// ---------------------- API -------------------
 //Crear Ordenes
 const crearOrdenes = async () => {
   let user;
@@ -348,7 +355,7 @@ const crearDetalle = async () => {
         alert("Tienes una orden en proceso");
         window.location.replace("../pages/wait/inline.html");
       }else{
-       //  window.location.replace("tomarOrdenes.html");     
+         window.location.replace("tomarOrdenes.html");     
       }
     }else{
       window.location.replace("../tablet/verMesas.html");
@@ -358,5 +365,4 @@ const crearDetalle = async () => {
     alert("Error al obtener informacion intente mas tarde !! " + error);
    }
 };
-
 validateOrder();

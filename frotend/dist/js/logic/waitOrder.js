@@ -10,7 +10,7 @@ button.addEventListener('click', event => {
 
 });
 
-const crearDetalle = async () => {
+const cambiarFormularioOrden = async () => {
     let user;
     let mesaSelect;
     let order;
@@ -18,6 +18,7 @@ const crearDetalle = async () => {
   
     try
     {
+      /*
       user = await axios.get('http://localhost:8080/users/'+localStorage.getItem('id'),{
       });
   
@@ -28,11 +29,14 @@ const crearDetalle = async () => {
         "user":user.data,
         "statusOrder":"preparada",
         "tablet":mesaSelect.data
+      }); */
+
+      order = await axios.get('http://localhost:8080/orders/getOrderActiveLoguin/'+localStorage.getItem('id'),{
       });
 
-      if(order.data.statusOrder == "preparada"){
+      if(order.data == "User order prepared"){
         porciento.value = "90";
-        texto.textContent = "La orden fue entregada deseseas facturar tu orden";
+        texto.textContent = "La orden fue entregada deseseas facturar tu orden?";
         console.log(button)
         button.removeAttribute("hidden");
       }
@@ -43,6 +47,6 @@ const crearDetalle = async () => {
     catch(error)
     {
       alert("Problema al registrar detalle de la orden " + error);
-      window.location.replace("../../index.html");
+      //window.location.replace("../../index.html");
     }
   }

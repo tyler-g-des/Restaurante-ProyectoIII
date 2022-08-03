@@ -71,11 +71,19 @@ public class OrderController{
     {
         if(this.orderService.getOrderActiveLoguin(id) != null)
         {
+           if(this.orderService.getOrderActiveLoguin(id).getstatusOrder().equals("creada")) 
+           {
             return new ResponseEntity<>("User order register",HttpStatus.ACCEPTED);
-        }
-        if(this.orderService.getOrderActivePrepared(id) != null)
-        {
+           }
+
+           if(this.orderService.getOrderActiveLoguin(id).getstatusOrder().equals("preparada")) {
             return new ResponseEntity<>("User order prepared",HttpStatus.ACCEPTED);
+           }
+
+           else
+           {
+               return new ResponseEntity<>("Not found status",HttpStatus.ACCEPTED);
+           }
         }
         else
         {

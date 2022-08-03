@@ -69,7 +69,7 @@ public class OrderService{
               
             if(orderSelect.getUser().getId() == id)
             {
-                if(orderSelect.getstatusOrder().equals("creada"))
+                if(orderSelect.getstatusOrder().equals("creada") || orderSelect.getstatusOrder().equals("preparada") )
                 {
                   return orderSelect;
                 } 

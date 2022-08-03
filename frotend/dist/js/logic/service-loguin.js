@@ -32,12 +32,10 @@ let response;
           window.location.replace("pages/wait/inline.html");
         }
         if(order.data == "User order prepared"){
-          alert("Tienes una orden preparada");
+          alert("Tienes una orden entregada pendiente de factura");
           window.location.replace("pages/wait/inline.html");
         }
-        else{
-          window.location.replace("pages/order/tomarOrdenes.html");     
-        }
+        
     }
      catch(error){
       alert("Error al obtener informacion intente mas tarde !! " + error);
