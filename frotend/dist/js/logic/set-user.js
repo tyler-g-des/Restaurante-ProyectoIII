@@ -9,6 +9,9 @@ const campoDireccion = document.querySelector("#campoDireccion");
 
 campoRol.value = "usuario";
 
+document.addEventListener('DOMContentLoaded', function() {
+  applyInputMask('campoTelefono', '(000)');
+});
 
 const setUser = async () => {
 
@@ -50,7 +53,16 @@ const setUser = async () => {
        campoDireccion.value === "" || campoDireccion.value === null)
     {
       alert("Debe llenar todos los campos");
-    }else{  
+    }
+    if(campoTelefono.value.length != 10 )
+    {
+       alert("el numero de telefono debe ser igual a 10 digitos")
+    }
+    if(campoEmail.value.includes('.') != true || campoEmail.value.includes('@') != true)
+    {
+       alert("debe colocar el correo ejemplo tony@starkindustries.com")
+    }
+    else{  
     setUser();
     }
   });

@@ -29,6 +29,7 @@ document.getElementById("fecha").value =  fecha.toJSON().slice(0,10);
 //Obtener cantidad de personas
 botonIniciarPedido.addEventListener('click', event => {
    let numeroPersonas = document.getElementById("numeroPersona");
+   
 });
 
 // Evento boton sin accion
@@ -120,7 +121,7 @@ botonMesa.addEventListener('click', event => {
   if(botonVolver.textContent == "Cancelar Orden")
   {    
       if (window.confirm("Si vas a otro menu cancelaras la orden deseas salir igualmente?")) {
-          window.location.replace("order/tablet/dashboard.html");  
+          window.location.replace("order/tablet/verMesas.html");  
           prepararPaginaOrdenes();
       }
       else{
@@ -134,7 +135,7 @@ botonEditarUsuario.addEventListener('click', event => {
   if(botonVolver.textContent == "Cancelar Orden")
   {    
       if (window.confirm("Si vas a otro menu cancelaras la orden deseas salir igualmente?")) {
-         window.location.replace("pages/user/contact-us.html");  
+         window.location.replace("pages/user/editarUsuario.html");  
           prepararPaginaOrdenes();
       }
       else{
@@ -166,7 +167,15 @@ const prepararPlatos = async () => {
    {
       platos = await axios.get("http://localhost:8080/plates",{
       });
+    }
+    catch(error){
+      alert("Ocurrio un problema al cargar formulario intente mas tarde platos!! " + error);
+      window.location.replace("../../index.html");        
 
+    }  
+    
+    if(platos != null || platos.data != "" || platos.data.length === 0)
+    {
       for(let i=0; i<=platos.data.length-1; i++){
             if(platos.data[i].dishDescription == "plato")
             {
@@ -197,13 +206,13 @@ const prepararPlatos = async () => {
       for(let iii=0; iii<=bebida.length-1; iii++){
         bebidaHTML.innerHTML += "<option>" + bebida[iii]+ "</option>"
       }
-     
-   }
-   catch(error){
-    alert("Ocurrio un problema al cargar formulario intente mas tarde platos!!" + error);
-      window.location.replace("../../index.html");    
-   }
+    }
+    else{
+      alert("Ocurrio un problema al cargar formulario intente mas tarde platos logico!!");
+      window.location.replace("../../index.html");        
+    }
 }
+
 
 // Logica cuando se sale de una pagina
 const prepararPaginaOrdenes = () => {
@@ -227,8 +236,7 @@ const prepararPaginaOrdenes = () => {
   }
   catch(error)
   {
-
-     alert("Ocurrio un problema al cargar formulario intente mas tarde !!" + error);
+     alert("Ocurrio un problema al cargar formulario intente mas tarde mesas!!" + error);
       window.location.replace("../../index.html");     
   }
 }
@@ -312,7 +320,7 @@ const crearDetalle = async () => {
     await ocuparMesa();
     alert("se registro el detalle de la orden!!");
     localStorage.setItem('mesa',valueMesa)
-    window.location.replace("../tablet/inline.html"); 
+    window.location.replace("../wait/inline.html"); 
   }
   catch(error)
   {
@@ -343,26 +351,3 @@ const crearDetalle = async () => {
      alert("Error cambiando estado " +  error)
    }
  }
-
- const validateOrder = async () => {
-
-  try{  
-     let order = await axios.get('http://localhost:8080/orders/getOrderActiveLoguin/'+localStorage.getItem('id'),{
-   });
-   if(rol != "administrador")
-   {
-      if(order.data == "User order register"){
-        alert("Tienes una orden en proceso");
-        window.location.replace("../pages/wait/inline.html");
-      }else{
-         window.location.replace("tomarOrdenes.html");     
-      }
-    }else{
-      window.location.replace("../tablet/verMesas.html");
-    }
-   }
-   catch(error){
-    alert("Error al obtener informacion intente mas tarde !! " + error);
-   }
-};
-validateOrder();

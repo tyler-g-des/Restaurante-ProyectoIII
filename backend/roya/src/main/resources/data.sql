@@ -1,0 +1,11 @@
+insert into tablets values (1,'Libre','mesa');
+insert into tablets values (2,'Libre','mesa');
+insert into tablets values (3,'Libre','mesa');
+insert into tablets values (4,'Libre','mesa');
+insert into tablets values (5,'Libre','mesa');
+insert into tablets values (6,'Libre','mesa');
+insert into tablets values (7,'Libre','mesa');
+insert into tablets values (8,'Libre','mesa');
+insert into tablets values (9,'Libre','mesa');
+insert into tablets values (10,'Libre','mesa');
+commit;

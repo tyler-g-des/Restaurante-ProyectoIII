@@ -1,6 +1,10 @@
 document.querySelector("#nombreUsuario").textContent = localStorage.getItem('name');
-
+let actualizar = document.querySelector("#actualizar");
 let response;
+
+actualizar.addEventListener('click', event => {
+  location.reload();
+});
 
 const prepararOrden = async (mesa) => {
     let mesaSelect;

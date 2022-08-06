@@ -4,6 +4,12 @@ let porciento = document.getElementById("porciento");
 let texto = document.getElementById("texto");
 let button = document.getElementById("facturar");
 
+let actualizar = document.querySelector("#actualizar");
+
+actualizar.addEventListener('click', event => {
+  location.reload();
+});
+
 button.addEventListener('click', event => {
 
   window.location.replace("../order/facturar.html"); 
