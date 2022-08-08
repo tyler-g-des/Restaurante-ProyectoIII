@@ -51,6 +51,13 @@ actualizarPlato();
 
 
 const actualizarPlato = async () => {
+
+ if(nombre.value === "" || nombre.value === null ||
+    precio.value === "" || precio.value === null )
+ {
+  alert("debe llenar todos los campos");
+}
+else{
   try{
     user = await axios.post('http://localhost:8080/plates',{
       "id":idPlato,
@@ -58,8 +65,10 @@ const actualizarPlato = async () => {
       "price": precio.value,
       "dishDescription": tipo.value
     });
+    location.reload();
   }
   catch(error){
    alert(error)
   }
+}
 }

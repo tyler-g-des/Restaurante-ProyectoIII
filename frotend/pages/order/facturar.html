@@ -16,6 +16,11 @@
 
 <div class="wrapper">
   
+  <!-- Preloader -->
+  <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__shake" src="../../dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+  </div>
+
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -107,21 +112,10 @@
               <!-- /.row -->
 
               <div class="row">
-                <!-- accepted payments column -->
-                <div class="col-6">
-                  <p class="lead">Mentodos de Pagos:</p>
-                  <img src="../../dist/img/credit/visa.png" alt="Visa">
-                  <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
-                  <img src="../../dist/img/credit/american-express.png" alt="American Express">
-                  <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
 
-                  <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                    Selecciona tu metodo de pago
-                  </p>
-                </div>
                 <!-- /.col -->
                 <div class="col-6">
-                  <p class="lead">Impuestos</p>
+                  <p class="lead">Precio de los productos</p>
 
                   <div class="table-responsive">
                     <table class="table">
@@ -145,9 +139,32 @@
                   </div>
                 </div>
                 <!-- /.col -->
+
+                <!-- /.col -->
+                <div class="col-6">
+                  <p class="lead">Impuestos</p>
+
+                  <div class="table-responsive">
+                    <table class="table" id="cuerpoTablaPrecio">
+
+                    </table>
+                  </div>
+                </div>
+                <!-- /.col -->
               </div>
               <!-- /.row -->
+                <!-- accepted payments column -->
+                <div class="col-6">
+                  <p class="lead">Mentodos de Pagos:</p>
+                  <img src="../../dist/img/credit/visa.png" alt="Visa">
+                  <img src="../../dist/img/credit/mastercard.png" alt="Mastercard">
+                  <img src="../../dist/img/credit/american-express.png" alt="American Express">
+                  <img src="../../dist/img/credit/paypal2.png" alt="Paypal">
 
+                  <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
+                    Selecciona tu metodo de pago
+                  </p>
+                </div>
               <!-- this row will not appear when printing -->
               <div class="row no-print">
                 <div class="col-12">

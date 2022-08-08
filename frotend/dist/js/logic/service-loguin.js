@@ -27,15 +27,15 @@ let response;
     try{  
        let order = await axios.get('http://localhost:8080/orders/getOrderActiveLoguin/'+localStorage.getItem('id'),{
      });
-        if(order.data == "User order register"){
+        if(order.data === "User order register"){
           alert("Tienes una orden en proceso");
           window.location.replace("pages/wait/inline.html");
         }
-        if(order.data == "User order prepared"){
+        else if(order.data === "User order prepared"){
           alert("Tienes una orden entregada pendiente de factura");
           window.location.replace("pages/wait/inline.html");
         }
-        if(localStorage.getItem('rol') === 'administrador'){
+        else if(localStorage.getItem('rol') === 'administrador'){
           window.location.replace("pages/tablet/verMesas.html")
         }
         else{
@@ -54,7 +54,7 @@ let response;
 
       try{  
         response = await axios.post('http://localhost:8080/users/logins',{
-           "name":name,
+           "name":name.toLowerCase(),
            "password":password
       });
 
@@ -80,7 +80,7 @@ let response;
 
     const dashboardPrepared = async (name,password) => {
         const response = await axios.post('http://localhost:8080/users/getUserName',{
-          "name":name,
+          "name":name.toLowerCase(),
           "password":password
         })
           localStorage.setItem('id',response.data.id);

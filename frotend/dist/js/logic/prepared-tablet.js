@@ -44,6 +44,7 @@ const prepararOrden = async (mesa) => {
         }
       }
      } 
+     cambiarEstadoMesa(mesa);
      alert("Orden entregada");
     }
     catch(error)
@@ -88,6 +89,22 @@ const mesaEstados = async () => {
 
   }
 
+}
+
+const cambiarEstadoMesa = async (mesa) => {
+
+  try 
+  {
+    actualizarReponse = await axios.post('http://localhost:8080/tablets',{
+      "id": mesa,
+      "status": "Libre",
+      "description": "mesa"
+    });
+  } 
+  catch (error) 
+  {
+      alert("Problema al solicitar datos de la Mesas" + error)
+   }
 }
 
 // ------------ Mesas redirecciones 

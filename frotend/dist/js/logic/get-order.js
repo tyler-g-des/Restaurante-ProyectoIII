@@ -213,7 +213,6 @@ const prepararPlatos = async () => {
     }
 }
 
-
 // Logica cuando se sale de una pagina
 const prepararPaginaOrdenes = () => {
   sessionStorage.clear();
@@ -306,7 +305,7 @@ const crearDetalle = async () => {
     });
 
     console.log(order.data);
-    for(let i=0; i<=incremento; i++)
+    for(let i=0; i<=incremento-1; i++)
     {
        respuesta[i] = JSON.parse(sessionStorage.getItem('pedido'+i));
        
@@ -331,7 +330,15 @@ const crearDetalle = async () => {
       await ocuparMesa();
       localStorage.setItem('mesa',valueMesa)
       window.location.replace("../wait/inline.html"); 
-    }else{
+    }
+    if(error == "TypeError: null is not an object (evaluating 'respuesta[i][1]'")
+    {
+      alert("se registro la el detalle de la orden!!");
+      await ocuparMesa();
+      localStorage.setItem('mesa',valueMesa)
+      window.location.replace("../wait/inline.html"); 
+    }
+    else{
     alert("Problema al registrar detalle de la orden " + error);
     }
   }

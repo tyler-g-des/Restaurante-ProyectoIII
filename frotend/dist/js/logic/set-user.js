@@ -17,7 +17,7 @@ const setUser = async () => {
 
     try{
        response = await axios.post('http://localhost:8080/users',{
-        "name":campoName.value,
+        "name":campoName.value.toLowerCase(),
         "rol":campoRol.value,
         "email":campoEmail.value,
         "address":campoDireccion.value,
@@ -54,11 +54,11 @@ const setUser = async () => {
     {
       alert("Debe llenar todos los campos");
     }
-    if(campoTelefono.value.length != 10 )
+    else if(campoTelefono.value.length != 10 )
     {
        alert("el numero de telefono debe ser igual a 10 digitos")
     }
-    if(campoEmail.value.includes('.') != true || campoEmail.value.includes('@') != true)
+    else if(campoEmail.value.includes('.') != true || campoEmail.value.includes('@') != true)
     {
        alert("debe colocar el correo ejemplo tony@starkindustries.com")
     }
